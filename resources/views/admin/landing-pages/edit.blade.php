@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="text-2xl font-bold mb-6">Edit Landing Page</h1>
 
-    <form action="{{ route('admin.landing-pages.update', $landingPage) }}" method="POST">
+    <form action="{{ route('landing-pages.update', $landingPage) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="mb-4">
@@ -24,6 +24,6 @@
     $menu = [
         ['name' => 'Users', 'url' => route('admin.users')],
         ['name' => 'Settings', 'url' => route('admin.settings')],
-        ['name' => 'Landing Pages', 'url' => route('admin.landing-pages.index')],
+        ['name' => 'Landing Pages', 'url' => route('landing-pages.index')],
     ];
 @endphp

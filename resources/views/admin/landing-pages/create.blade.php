@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="text-2xl font-bold mb-6">Create Landing Page</h1>
 
-    <form action="{{ route('admin.landing-pages.store') }}" method="POST">
+    <form action="{{ route('landing-pages.store') }}" method="POST">
         @csrf
         <div class="mb-4">
             <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
@@ -22,6 +22,6 @@
     $menu = [
         ['name' => 'Users', 'url' => route('admin.users')],
         ['name' => 'Settings', 'url' => route('admin.settings')],
-        ['name' => 'Landing Pages', 'url' => route('admin.landing-pages.index')],
+        ['name' => 'Landing Pages', 'url' => route('landing-pages.index')],
     ];
 @endphp

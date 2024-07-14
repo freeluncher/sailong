@@ -31,7 +31,7 @@ class LandingPageController extends Controller
 
         LandingPage::create($request->all());
 
-        return redirect()->route('admin.landing-pages.index')
+        return redirect()->route('landing-pages.index')
                          ->with('success', 'Landing page created successfully.');
     }
 
@@ -49,7 +49,7 @@ class LandingPageController extends Controller
 
         $landingPage->update($request->all());
 
-        return redirect()->route('admin.landing-pages.index')
+        return redirect()->route('landing-pages.index')
                          ->with('success', 'Landing page updated successfully.');
     }
 
@@ -57,7 +57,7 @@ class LandingPageController extends Controller
     {
         $landingPage->delete();
 
-        return redirect()->route('admin.landing-pages.index')
+        return redirect()->route('landing-pages.index')
                          ->with('success', 'Landing page deleted successfully.');
     }
 }

@@ -54,12 +54,6 @@ Route::middleware(['auth', 'role:admin', 'PreventBackHistory'])->group(function 
     Route::get('/admin/dashboard', [AdminController::class, 'showAdminDashboardPage'])->name('admin.dashboard');
     Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
     Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
-    Route::get('/admin/landing-pages/index', [LandingPageController::class, 'index'])->name('admin.landing-pages.index');
-    Route::get('/admin/landing-pages/index/create', [LandingPageController::class, 'create'])->name('admin.landing-pages.create');
-    Route::get('/admin/landing-pages/{id}/edit', [LandingPageController::class, 'edit'])->name('admin.landing-pages.edit');
-    Route::post('/admin/landing-pages/{id}/update', [LandingPageController::class, 'update'])->name('admin.landing-pages.update');
-    Route::post('/admin/landing-pages/{id}/destroy', [LandingPageController::class, 'destroy'])->name('admin.landing-pages.destroy');
-    Route::post('/admin/landing-pages/index/store', [LandingPageController::class, 'store'])->name('admin.landing-pages.store');
     Route::resource('admin/landing-pages', LandingPageController::class);
 
 });
