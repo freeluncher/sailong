@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\LandingPage;
 
 class LandingPageController extends Controller
 {
@@ -12,54 +13,51 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        //
+        $pages = LandingPage::all();
+        return view('admin.landing-pages.index', compact('pages'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.landing-pages.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required',
+        ]);
+
+        LandingPage::create($request->all());
+
+        return redirect()->route('admin.landing-pages.index')
+                         ->with('success', 'Landing page created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(LandingPage $landingPage)
     {
-        //
+        return view('admin.landing-pages.edit', compact('landingPage'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, LandingPage $landingPage)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required',
+        ]);
+
+        $landingPage->update($request->all());
+
+        return redirect()->route('admin.landing-pages.index')
+                         ->with('success', 'Landing page updated successfully.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(LandingPage $landingPage)
     {
-        //
-    }
+        $landingPage->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('admin.landing-pages.index')
+                         ->with('success', 'Landing page deleted successfully.');
     }
 }
