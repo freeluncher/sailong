@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sailong</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js']);
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-gray-100">
+
     <nav class="bg-white shadow-md">
         <div class="container mx-auto px-4 py-2 flex justify-between items-center">
             <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-700">Sailong</a>
@@ -26,9 +27,10 @@
             </div>
         </div>
     </nav>
-    <div class="container mx-auto px-4 py-6">
+    <div id="main" class="container mx-auto px-4">
         @yield('content')
     </div>
+
 </body>
 
 </html>

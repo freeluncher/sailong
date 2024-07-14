@@ -28,10 +28,8 @@ class LoginController extends Controller
                 return redirect()->intended(RouteServiceProvider::ADMIN_HOME);
             } elseif ($user->hasRole('homestay')) {
                 return redirect()->intended(RouteServiceProvider::HOMESTAY_HOME);
-            } elseif ($user->hasRole('user')) {
-                return redirect()->intended(RouteServiceProvider::USER_HOME);
             } else {
-                return redirect()->intended(RouteServiceProvider::HOME);
+                return redirect()->intended(RouteServiceProvider::USER_HOME);
             }
         }
         return back()->withErrors(['email' => 'Email atau password yang anda gunakan salah']);

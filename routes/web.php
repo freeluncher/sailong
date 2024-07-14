@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 //Authentication Route
-Route::middleware(['guest'])->group(function () {
+Route::middleware(['guest', 'PreventBackHistory'])->group(function () {
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [LoginController::class, 'login']);
     Route::get('register', [RegisterController::class, 'showRegisterForm'])->name('register');
@@ -31,20 +31,23 @@ Route::middleware(['auth', 'redirect.role.dashboard'])->get('/dashboard', functi
     // This will never be reached as the middleware will handle the redirect
     return view('dashboard');
 });
+Route::middleware(['auth', 'PreventBackHistory'])->group(
+    function () {
 
-Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-
+        Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+    }
+);
 
 Route::get('forgotPassword', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('password.request');
 Route::post('forgotPassword', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
 //Dashboard Route
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'role:admin', 'PreventBackHistory'])->group(function () {
     Route::get('/dashboard/admin', [DashboardController::class, 'showAdminDashboardPage'])->name('dashboard.admin');
 });
-Route::middleware(['auth', 'role:homestay'])->group(function () {
+Route::middleware(['auth', 'role:homestay', 'PreventBackHistory'])->group(function () {
     Route::get('/dashboard/homestay', [DashboardController::class, 'showHomestayDashboardPage'])->name('dashboard.homestay');
 });
-Route::middleware(['auth', 'role:user'])->group(function () {
+Route::middleware(['auth', 'role:user', 'PreventBackHistory'])->group(function () {
     Route::get('/dashboard/user', [DashboardController::class, 'showUserDashboardPage'])->name('dashboard.user');
 });
