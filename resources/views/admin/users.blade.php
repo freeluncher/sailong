@@ -8,6 +8,6 @@
     $menu = [
         ['name' => 'Users', 'url' => route('admin.users')],
         ['name' => 'Settings', 'url' => route('admin.settings')],
-        ['name' => 'Landing Pages', 'url' => route('admin.landing-pages.index')],
+        ['name' => 'Landing Pages', 'url' => route('landing-pages.index')],
     ];
 @endphp

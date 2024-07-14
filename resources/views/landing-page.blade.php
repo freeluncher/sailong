@@ -4,8 +4,8 @@
     <!-- Hero Section -->
     <div class="relative h-screen w-full">
         <img src="{{ asset($landingPage->hero_image_path) }}" alt="Background Image"
-            class="absolute inset-0 w-full h-full object-cover filter blur-sm">
-        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+            class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
         <div class="absolute inset-0 flex flex-col items-center justify-center">
             <h1 class="text-4xl text-white font-bold">{{ $landingPage->title }}</h1>
             <p class="text-xl text-white mt-4">{{ $landingPage->content }}</p>
