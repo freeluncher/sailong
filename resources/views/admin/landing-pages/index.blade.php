@@ -10,6 +10,8 @@
                 <tr>
                     <th class="border px-4 py-2">Title</th>
                     <th class="border px-4 py-2">Actions</th>
+                    <th class="border px-4 py-2">View</th>
+                    <th class="border px-4 py-2">Activate</th> <!-- Add Activate Column -->
                 </tr>
             </thead>
             <tbody>
@@ -25,6 +27,20 @@
                                 <button type="submit" class="text-red-500">Delete</button>
                             </form>
                         </td>
+                        <td class="border px-4 py-2">
+                            <a href="{{ route('landing-pages.show', $page) }}" class="text-green-500">View</a>
+                        </td>
+                        <td class="border px-4 py-2">
+                            @if (!$page->is_active)
+                                <form action="{{ route('landing-pages.activate', $page) }}" method="POST"
+                                    class="inline-block">
+                                    @csrf
+                                    <button type="submit" class="text-blue-500">Activate</button>
+                                </form>
+                            @else
+                                <span class="text-green-500">Active</span>
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -33,6 +49,8 @@
         <p>No landing pages found.</p>
     @endif
 @endsection
+
+
 @php
     $menu = [
         ['name' => 'Users', 'url' => route('admin.users')],

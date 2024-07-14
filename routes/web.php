@@ -9,10 +9,17 @@ use App\Http\Controllers\HomestayController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\LandingPageController;
 
-
 Route::get('/', function () {
-    return view('/landing-page');
+    $activePage = \App\Models\LandingPage::where('is_active', true)->first();
+
+    if ($activePage) {
+        return view('landing-page', ['landingPage' => $activePage]);
+    } else {
+        return view('welcome'); // Default page if no landing page is active
+    }
 });
+Route::get('/landing-page/{id}', [LandingPageController::class, 'show'])->name('landing-page.show');
+Route::post('landing-pages/{landingPage}/activate', [LandingPageController::class, 'activate'])->name('landing-pages.activate');
 /*
 |------------------------------------------------------------------------------------------------------------------------------------------------
 | Authentication Route
