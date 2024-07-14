@@ -18,7 +18,7 @@
                         <td class="border px-4 py-2">{{ $page->title }}</td>
                         <td class="border px-4 py-2">
                             <a href="{{ route('admin.landing-pages.edit', $page) }}" class="text-blue-500">Edit</a>
-                            <form action="{{ route('admin.landing-pages.destroy', $page) }}" method="POST"
+                            <form action="{{ route('admin.landing-pages.destroy', $page->id) }}" method="POST"
                                 class="inline-block">
                                 @csrf
                                 @method('DELETE')
