@@ -10,4 +10,13 @@ class HomestayController extends Controller
     {
         return view('homestay.dashboard');
     }
+     public function reservations()
+    {
+        return view('homestay.reservations');
+    }
+
+    public function settings()
+    {
+        return view('homestay.settings');
+    }
 }

@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="text-2xl font-bold mb-6">Homestay Dashboard</h1>
-    <p>Welcome to the homestay dashboard.</p>
+    <h1 class="text-2xl font-bold mb-6">Homestay Settings</h1>
+    <p>Manage your settings here.</p>
 @endsection
-
 @php
     $menu = [
         ['name' => 'Reservations', 'url' => route('homestay.reservations')],

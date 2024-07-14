@@ -51,12 +51,19 @@ Route::post('forgotPassword', [ForgotPasswordController::class, 'sendResetLinkEm
 //<----------- Admin Route -------------->
 Route::middleware(['auth', 'role:admin', 'PreventBackHistory'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'showAdminDashboardPage'])->name('admin.dashboard');
+    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
+
 });
 //<----------- Homestay Route -------------->
 Route::middleware(['auth', 'role:homestay', 'PreventBackHistory'])->group(function () {
     Route::get('/homestay/dashboard', [HomestayController::class, 'showHomestayDashboardPage'])->name('homestay.dashboard');
+    Route::get('/homestay/reservations', [HomestayController::class, 'reservations'])->name('homestay.reservations');
+    Route::get('/homestay/settings', [HomestayController::class, 'settings'])->name('homestay.settings');
 });
 //<----------- User Route -------------->
 Route::middleware(['auth', 'role:user', 'PreventBackHistory'])->group(function () {
-    Route::get('/user/dashboard', [UserController::class, 'showUserDashboardPage'])->name('user.dashboard');
+    Route::get('/{name}/dashboard', [UserController::class, 'showUserDashboardPage'])->name('user.dashboard');
+    Route::get('/{name}/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::get('/{name}/bookings', [UserController::class, 'bookings'])->name('user.bookings');
 });

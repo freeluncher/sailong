@@ -23,7 +23,7 @@ class RedirectToRoleDashboard
 
             if ($user->hasRole('admin')) {
                 return redirect(RouteServiceProvider::ADMIN_HOME);
-            } elseif ($user->hasRole('doctor')) {
+            } elseif ($user->hasRole('homestay')) {
                 return redirect(RouteServiceProvider::HOMESTAY_HOME);
             } else {
                 return redirect(RouteServiceProvider::USER_HOME);

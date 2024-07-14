@@ -23,13 +23,14 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             /** @var \App\Models\User */
             $user = Auth::user();
+            $name = $user->name;
 
             if ($user->hasRole('admin')) {
-                return redirect()->intended(RouteServiceProvider::ADMIN_HOME);
+                return redirect()->intended("/admin/dashboard");
             } elseif ($user->hasRole('homestay')) {
-                return redirect()->intended(RouteServiceProvider::HOMESTAY_HOME);
+                return redirect()->intended("/homestay/dashboard");
             } else {
-                return redirect()->intended(RouteServiceProvider::USER_HOME);
+                return redirect()->intended("/$name/dashboard");
             }
         }
         return back()->withErrors(['email' => 'Email atau password yang anda gunakan salah']);

@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Forgot Password</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-
-<body>
+@extends('layouts.guest')
+@section('content')
     <div class="container mx-auto">
         <h1>Forgot Password</h1>
         <form method="POST" action="{{ route('password.email') }}">
@@ -18,6 +11,4 @@
             <button type="submit">Send Password Reset Link</button>
         </form>
     </div>
-</body>
-
-</html>
+@endsection
