@@ -46,7 +46,9 @@
             </tbody>
         </table>
     @else
-        <p>No landing pages found.</p>
+        <div class="mt-6">
+            <p>No landing pages found.</p>
+        </div>
     @endif
 @endsection
 
