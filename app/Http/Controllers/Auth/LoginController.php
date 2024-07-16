@@ -20,7 +20,8 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
+         $remember = $request->has('remember'); // Check if 'remember' field is present
+        if (Auth::attempt($credentials, $remember)) {
             /** @var \App\Models\User */
             $user = Auth::user();
             $name = $user->name;
