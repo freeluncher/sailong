@@ -11,7 +11,11 @@
 
 <body>
     <div x-data="{ open: false }">
-        <x-top-nav-guest />
+        @auth
+            <x-top-nav />
+        @else
+            <x-top-nav-guest />
+        @endauth
     </div>
     <div class="relative h-screen w-full">
         @yield('content')

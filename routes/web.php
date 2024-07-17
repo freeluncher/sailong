@@ -37,7 +37,7 @@ Route::middleware(['guest', 'PreventBackHistory'])->group(function () {
 Route::middleware(['auth', 'redirect.role.dashboard'])->get('/dashboard', function () {
     // This will never be reached as the middleware will handle the redirect
     return view('dashboard');
-});
+})->name('dashboard');
 
 //<----------- Logout Route -------------->
 Route::middleware(['auth', 'PreventBackHistory'])->group(
@@ -60,6 +60,11 @@ Route::post('forgotPassword', [ForgotPasswordController::class, 'sendResetLinkEm
 Route::middleware(['auth', 'role:admin', 'PreventBackHistory'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'showAdminDashboardPage'])->name('admin.dashboard');
     Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+     Route::get('admin/users/create', [AdminController::class, 'create'])->name('admin.users.create');
+    Route::post('admin/users', [AdminController::class, 'store'])->name('admin.users.store');
+    Route::get('admin/users/{user}/edit', [AdminController::class, 'edit'])->name('admin.users.edit');
+    Route::put('admin/users/{user}', [AdminController::class, 'update'])->name('admin.users.update');
+    Route::delete('admin/users/{user}', [AdminController::class, 'destroy'])->name('admin.users.destroy');
     Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
     Route::resource('admin/landing-pages', LandingPageController::class);
 
