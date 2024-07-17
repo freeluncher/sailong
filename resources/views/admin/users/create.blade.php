@@ -24,11 +24,41 @@
             <input type="password" name="password_confirmation" id="password_confirmation"
                 class="w-full border border-gray-300 rounded px-4 py-2" required>
         </div>
-        <div>
-            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Create</button>
+        <div class="mb-4">
+            <label for="roles" class="block text-gray-700">Roles</label>
+            <select name="roles[]" id="roles" multiple class="w-full border border-gray-300 rounded px-4 py-2">
+                @foreach ($roles as $role)
+                    <option value="{{ $role->name }}">{{ $role->name }}</option>
+                @endforeach
+            </select>
         </div>
+        <div class="mb-4">
+            <label for="permissions" class="block text-gray-700">Permissions</label>
+            <div class="mb-2">
+                <input type="checkbox" id="select-all-permissions">
+                <label for="select-all-permissions">Select All</label>
+            </div>
+            <select name="permissions[]" id="permissions" multiple class="w-full border border-gray-300 rounded px-4 py-2">
+                @foreach ($permissions as $permission)
+                    <option value="{{ $permission->name }}">{{ $permission->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Create</button>
     </form>
+
+    <script>
+        document.getElementById('select-all-permissions').addEventListener('change', function() {
+            let permissions = document.getElementById('permissions').options;
+            for (let i = 0; i < permissions.length; i++) {
+                permissions[i].selected = this.checked;
+            }
+        });
+    </script>
 @endsection
+
+
+
 @php
     $menu = [
         ['name' => 'Users', 'url' => route('admin.users')],
