@@ -8,6 +8,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomestayController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\LandingPageController;
+use App\Http\Controllers\Admin\CrudUserController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\PermissionController;
 
 Route::get('/', function () {
     $activePage = \App\Models\LandingPage::where('is_active', true)->first();
@@ -59,16 +62,13 @@ Route::post('forgotPassword', [ForgotPasswordController::class, 'sendResetLinkEm
 //<----------- Admin Route -------------->
 Route::middleware(['auth', 'role:admin', 'PreventBackHistory'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'showAdminDashboardPage'])->name('admin.dashboard');
-    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
-     Route::get('admin/users/create', [AdminController::class, 'create'])->name('admin.users.create');
-    Route::post('admin/users', [AdminController::class, 'store'])->name('admin.users.store');
-    Route::get('admin/users/{user}/edit', [AdminController::class, 'edit'])->name('admin.users.edit');
-    Route::put('admin/users/{user}', [AdminController::class, 'update'])->name('admin.users.update');
-    Route::delete('admin/users/{user}', [AdminController::class, 'destroy'])->name('admin.users.destroy');
+    Route::resource('admin/users', CrudUserController::class);
+    Route::resource('admin/roles', RoleController::class);
+    Route::resource('admin/permissions', PermissionController::class);
     Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
     Route::resource('admin/landing-pages', LandingPageController::class);
-
 });
+
 //<----------- Homestay Route -------------->
 Route::middleware(['auth', 'role:homestay', 'PreventBackHistory'])->group(function () {
     Route::get('/homestay/dashboard', [HomestayController::class, 'showHomestayDashboardPage'])->name('homestay.dashboard');

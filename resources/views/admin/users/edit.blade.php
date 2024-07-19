@@ -62,11 +62,9 @@
     </script>
 @endsection
 
-
-
 @php
     $menu = [
-        ['name' => 'Users', 'url' => route('admin.users')],
+        ['name' => 'Users', 'url' => route('users.index')],
         ['name' => 'Settings', 'url' => route('admin.settings')],
         ['name' => 'Landing Pages', 'url' => route('landing-pages.index')],
     ];
