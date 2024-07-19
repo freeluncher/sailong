@@ -2,8 +2,8 @@
 
 @section('content')
     <h1 class="text-2xl font-bold mb-6">Permissions</h1>
-    <a href="{{ route('admin.permissions.create') }}"
-        class="bg-blue-500 text-white py-2 px-4 rounded mb-4 inline-block">Create Permission</a>
+    <a href="{{ route('permissions.create') }}" class="bg-blue-500 text-white py-2 px-4 rounded mb-4 inline-block">Create
+        Permission</a>
     <table class="w-full table-auto bg-white rounded shadow">
         <thead>
             <tr>
@@ -16,9 +16,9 @@
                 <tr>
                     <td class="border px-4 py-2">{{ $permission->name }}</td>
                     <td class="border px-4 py-2">
-                        <a href="{{ route('admin.permissions.edit', $permission->id) }}"
+                        <a href="{{ route('permissions.edit', $permission->id) }}"
                             class="bg-yellow-500 text-white py-1 px-2 rounded">Edit</a>
-                        <form action="{{ route('admin.permissions.destroy', $permission->id) }}" method="POST"
+                        <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST"
                             class="inline-block">
                             @csrf
                             @method('DELETE')
@@ -32,7 +32,15 @@
 @endsection
 @php
     $menu = [
-        ['name' => 'Users', 'url' => route('admin.users')],
+        [
+            'name' => 'Users',
+            'url' => '#',
+            'submenu' => [
+                ['name' => 'All Users', 'url' => route('users.index')],
+                ['name' => 'Roles', 'url' => route('roles.index')],
+                ['name' => 'Permissions', 'url' => route('permissions.index')],
+            ],
+        ],
         ['name' => 'Settings', 'url' => route('admin.settings')],
         ['name' => 'Landing Pages', 'url' => route('landing-pages.index')],
     ];

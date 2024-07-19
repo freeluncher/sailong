@@ -75,7 +75,15 @@
 
 @php
     $menu = [
-        ['name' => 'Users', 'url' => route('admin.users')],
+        [
+            'name' => 'Users',
+            'url' => '#',
+            'submenu' => [
+                ['name' => 'All Users', 'url' => route('users.index')],
+                ['name' => 'Roles', 'url' => route('roles.index')],
+                ['name' => 'Permissions', 'url' => route('permissions.index')],
+            ],
+        ],
         ['name' => 'Settings', 'url' => route('admin.settings')],
         ['name' => 'Landing Pages', 'url' => route('landing-pages.index')],
     ];
