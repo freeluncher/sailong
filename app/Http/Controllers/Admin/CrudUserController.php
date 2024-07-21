@@ -13,15 +13,14 @@ class CrudUserController extends Controller
 {
      public function index()
     {
-        $users = User::with('roles', 'permissions')->get();
+        $users = User::with('roles')->get();
         return view('admin.users.index', compact('users'));
     }
 
     public function create()
     {
         $roles = Role::all();
-        $permissions = Permission::all();
-        return view('admin.users.create', compact('roles', 'permissions'));
+        return view('admin.users.create', compact('roles'));
     }
 
     public function store(Request $request)
@@ -31,7 +30,6 @@ class CrudUserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'roles' => 'required|array',
-            'permissions' => 'array',
         ]);
 
         $user = User::create([
@@ -41,7 +39,6 @@ class CrudUserController extends Controller
         ]);
 
         $user->syncRoles($request->roles);
-        $user->syncPermissions($request->permissions ?? []);
 
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
@@ -49,7 +46,6 @@ class CrudUserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
-        $permissions = Permission::all();
         return view('admin.users.edit', compact('user', 'roles', 'permissions'));
     }
 
@@ -60,7 +56,6 @@ class CrudUserController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8|confirmed',
             'roles' => 'required|array',
-            'permissions' => 'array',
         ]);
 
         $user->update([
@@ -70,7 +65,6 @@ class CrudUserController extends Controller
         ]);
 
         $user->syncRoles($request->roles);
-        $user->syncPermissions($request->permissions ?? []);
 
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
