@@ -2,7 +2,7 @@
 
 @section('content')
     <h1 class="text-2xl font-bold mb-6">Create New User</h1>
-    <form method="POST" action="{{ route('admin.users.store') }}">
+    <form method="POST" action="{{ route('users.store') }}">
         @csrf
         <div class="mb-4">
             <label for="name" class="block text-gray-700">Name</label>
@@ -32,29 +32,8 @@
                 @endforeach
             </select>
         </div>
-        <div class="mb-4">
-            <label for="permissions" class="block text-gray-700">Permissions</label>
-            <div class="mb-2">
-                <input type="checkbox" id="select-all-permissions">
-                <label for="select-all-permissions">Select All</label>
-            </div>
-            <select name="permissions[]" id="permissions" multiple class="w-full border border-gray-300 rounded px-4 py-2">
-                @foreach ($permissions as $permission)
-                    <option value="{{ $permission->name }}">{{ $permission->name }}</option>
-                @endforeach
-            </select>
-        </div>
         <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Create</button>
     </form>
-
-    <script>
-        document.getElementById('select-all-permissions').addEventListener('change', function() {
-            let permissions = document.getElementById('permissions').options;
-            for (let i = 0; i < permissions.length; i++) {
-                permissions[i].selected = this.checked;
-            }
-        });
-    </script>
 @endsection
 
 @php

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\LandingPageController;
 use App\Http\Controllers\Admin\CrudUserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
+    use App\Http\Controllers\RolePermissionController;
 
 Route::get('/', function () {
     $activePage = \App\Models\LandingPage::where('is_active', true)->first();
@@ -65,6 +66,9 @@ Route::middleware(['auth', 'role:admin', 'PreventBackHistory'])->group(function 
     Route::resource('admin/users', CrudUserController::class);
     Route::resource('admin/roles', RoleController::class);
     Route::resource('admin/permissions', PermissionController::class);
+    Route::get('admin/roles/{role}/permissions', [RolePermissionController::class, 'edit'])->name('roles.permissions.edit');
+    Route::post('admin/roles/{role}/permissions', [RolePermissionController::class, 'update'])->name('roles.permissions.update');
+
     Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
     Route::resource('admin/landing-pages', LandingPageController::class);
 });

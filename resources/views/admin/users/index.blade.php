@@ -10,7 +10,6 @@
                 <th class="px-4 py-2">Name</th>
                 <th class="px-4 py-2">Email</th>
                 <th class="px-4 py-2">Roles</th>
-                <th class="px-4 py-2">Permissions</th>
                 <th class="px-4 py-2">Actions</th>
             </tr>
         </thead>
@@ -20,7 +19,6 @@
                     <td class="border px-4 py-2">{{ $user->name }}</td>
                     <td class="border px-4 py-2">{{ $user->email }}</td>
                     <td class="border px-4 py-2">{{ implode(', ', $user->roles->pluck('name')->toArray()) }}</td>
-                    <td class="border px-4 py-2">{{ implode(', ', $user->permissions->pluck('name')->toArray()) }}</td>
                     <td class="border px-4 py-2">
                         <a href="{{ route('users.edit', $user->id) }}"
                             class="bg-yellow-500 text-white py-1 px-2 rounded">Edit</a>
