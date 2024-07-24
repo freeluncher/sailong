@@ -1,4 +1,4 @@
-<div class="bg-white shadow-md w-full py-4 px-6 flex justify-between items-center fixed top-0 z-50">
+<div class="bg-white shadow-md w-full py-4 px-6 flex justify-between items-center absolute top-0 z-50">
     <div class="flex items-center">
         <a href="{{ url('/') }}" class="text-gray-800 text-lg font-bold">{{ config('app.name', 'Laravel') }}</a>
     </div>

@@ -11,7 +11,8 @@ use App\Http\Controllers\Admin\LandingPageController;
 use App\Http\Controllers\Admin\CrudUserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
-    use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\DestinationController;
 
 Route::get('/', function () {
     $activePage = \App\Models\LandingPage::where('is_active', true)->first();
@@ -24,6 +25,8 @@ Route::get('/', function () {
 });
 Route::get('/landing-page/{id}', [LandingPageController::class, 'show'])->name('landing-page.show');
 Route::post('landing-pages/{landingPage}/activate', [LandingPageController::class, 'activate'])->name('landing-pages.activate');
+Route::get('/destinations', [DestinationController::class, 'index'])->name('destinations.index');
+Route::get('destinations/{destination}', [DestinationController::class, 'show'])->name('destinations.show');
 /*
 |------------------------------------------------------------------------------------------------------------------------------------------------
 | Authentication Route

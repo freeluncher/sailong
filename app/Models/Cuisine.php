@@ -13,5 +13,9 @@ class Cuisine extends Model
         'description',
         'location',
         'image',
+        'gallery',
+    ];
+     protected $casts = [
+        'gallery' => 'array',
     ];
 }

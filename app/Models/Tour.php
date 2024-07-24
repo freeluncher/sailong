@@ -14,6 +14,10 @@ class Tour extends Model
         'price',
         'duration',
         'image',
+        'gallery',
+    ];
+     protected $casts = [
+        'gallery' => 'array',
     ];
 
     public function bookings()

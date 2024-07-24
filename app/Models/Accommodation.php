@@ -14,6 +14,10 @@ class Accommodation extends Model
         'location',
         'image',
         'price_per_night',
+        'gallery',
+    ];
+     protected $casts = [
+        'gallery' => 'array',
     ];
 
     public function bookings()

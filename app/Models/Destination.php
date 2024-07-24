@@ -14,8 +14,11 @@ class Destination extends Model
         'location',
         'image',
         'ticket_price',
+        'gallery',
     ];
-
+    protected $casts = [
+        'gallery' => 'array',
+    ];
     public function bookings()
     {
         return $this->hasMany(Booking::class);
