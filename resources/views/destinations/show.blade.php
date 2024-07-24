@@ -28,9 +28,11 @@
     </div>
 
     <!-- Modal -->
-    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
-        <img id="modalImage" src="" alt="Full Screen Image" class="max-w-full max-h-full">
-        <button onclick="closeModal()" class="absolute top-4 right-4 text-white text-2xl">&times;</button>
+    <div id="imageModal" class="hidden">
+        <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center">
+            <img id="modalImage" src="" alt="Full Screen Image" class="max-w-full max-h-full">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-white text-2xl">&times;</button>
+        </div>
     </div>
     <script>
         function openModal(imageSrc) {

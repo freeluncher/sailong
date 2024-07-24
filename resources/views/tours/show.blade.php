@@ -2,14 +2,14 @@
 
 @section('content')
     <div class="relative h-screen w-full overflow-hidden">
-        <img src="{{ asset('img/' . $accommodation->image) }}" alt="{{ $accommodation->name }}"
+        <img src="{{ asset('img/' . $tour->image) }}" alt="{{ $tour->name }}"
             class="absolute inset-0 w-full h-full object-cover">
         <div class="absolute inset-0 bg-black bg-opacity-75"></div>
         <div class="absolute left-12 top-24 inset-0 flex flex-col items-start justify-start">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl text-white font-bold">{{ $accommodation->name }}</h1>
-            <p class="text-lg md:text-xl lg:text-2xl text-white mt-4">{{ $accommodation->location }}</p>
-            <p class="text-lg md:text-xl lg:text-2xl text-white mt-4">{{ $accommodation->description }}</p>
-            <p class="text-lg md:text-xl lg:text-2xl text-white mt-4">Ticket Price: Rp{{ $accommodation->price_per_night }}
+            <h1 class="text-4xl md:text-5xl lg:text-6xl text-white font-bold">{{ $tour->name }}</h1>
+            <p class="text-lg md:text-xl lg:text-2xl text-white mt-4">{{ $tour->duration }}</p>
+            <p class="text-lg md:text-xl lg:text-2xl text-white mt-4">{{ $tour->description }}</p>
+            <p class="text-lg md:text-xl lg:text-2xl text-white mt-4">Ticket Price: Rp{{ $tour->price }}
             </p>
         </div>
     </div>
@@ -18,7 +18,7 @@
             <h3 class="text-4xl font-bold mb-4">Gallery</h3>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            @foreach ($accommodation->gallery as $gallery)
+            @foreach ($tour->gallery as $gallery)
                 <div>
                     <img src="{{ asset($gallery['image']) }}" alt="Gallery Image"
                         class="w-full h-32 object-cover cursor-pointer"

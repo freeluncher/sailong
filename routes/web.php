@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CuisineController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\AccommodationController;
+use App\Http\Controllers\TourController;
 
 Route::get('/', function () {
     $activePage = \App\Models\LandingPage::where('is_active', true)->first();
@@ -30,8 +32,12 @@ Route::get('/destinations', [DestinationController::class, 'index'])->name('dest
 Route::get('destinations/{destination}', [DestinationController::class, 'show'])->name('destinations.show');
 Route::get('/accommodations', [AccommodationController::class, 'index'])->name('accommodations.index');
 Route::get('accommodations/{accommodation}', [AccommodationController::class, 'show'])->name('accommodations.show');
-/*
-|------------------------------------------------------------------------------------------------------------------------------------------------
+Route::get('/tours', [TourController::class, 'index'])->name('tours.index');
+Route::get('tours/{tour}', [TourController::class, 'show'])->name('tours.show');
+Route::get('/cuisines', [CuisineController::class, 'index'])->name('cuisines.index');
+Route::get('cuisines/{cuisine}', [CuisineController::class, 'show'])->name('cuisines.show');
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------
 | Authentication Route
 |------------------------------------------------------------------------------------------------------------------------------------------------
 */
