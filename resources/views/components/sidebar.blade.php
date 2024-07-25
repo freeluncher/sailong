@@ -1,7 +1,7 @@
 @props(['menu'])
 
 <div class="bg-gray-800 h-screen text-white w-64 space-y-6 py-7 px-2">
-    <a href="#" class="text-white flex items-center space-x-2 px-4">
+    <a href="{{ route('dashboard') }}" class="text-white flex items-center space-x-2 px-4">
         <span class="text-2xl font-extrabold">Dashboard</span>
     </a>
     <nav>

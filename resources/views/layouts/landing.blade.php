@@ -21,7 +21,9 @@
     </div>
     <div class="relative h-screen w-full">
         @yield('content')
+        @include('components.footer')
     </div>
+
     @yield('scripts')
 </body>
 

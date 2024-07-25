@@ -12,11 +12,16 @@
 <body class="bg-gray-100 h-screen flex flex-col items-center">
     <div class="w-full">
         <div x-data="{ open: false }">
-            <x-top-nav-guest />
+            @auth
+                <x-top-nav />
+            @else
+                <x-top-nav-guest />
+            @endauth
         </div>
     </div>
     <div id="main" class="w-full mx-auto h-screen items-center">
         @yield('content')
+        @include('components.footer')
     </div>
 </body>
 
