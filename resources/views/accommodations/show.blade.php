@@ -19,9 +19,9 @@
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             @foreach ($accommodation->gallery as $gallery)
-                <div>
+                <div class="w-full h-48">
                     <img src="{{ asset($gallery['image']) }}" alt="Gallery Image"
-                        class="w-full h-32 object-cover cursor-pointer"
+                        class="w-full h-full object-cover cursor-pointer"
                         onclick="openModal('{{ asset($gallery['image']) }}')">
                 </div>
             @endforeach

@@ -21,18 +21,20 @@
                 <div class="swiper-wrapper">
                     @if (is_array($landingPage->cards))
                         @foreach ($landingPage->cards as $card)
-                            <div class="swiper-slide w-full md:w-1/3 px-2 mb-6">
-                                <div class="bg-blue-500 rounded-lg overflow-hidden shadow-md h-full">
-                                    <div class="flex justify-center items-center px-6 pt-4">
-                                        <img class="w-2/3 h-2/3 object-cover" src="{{ asset($card['image_path']) }}"
-                                            alt="Image">
-                                    </div>
-                                    <div class="px-6 pt-2 pb-6">
-                                        <h2 class="text-xl text-white font-bold mb-2">{{ $card['title'] }}</h2>
-                                        <p class="text-gray-200">{{ $card['description'] }}</p>
+                            <a href="{{ $card['url'] }}">
+                                <div class="swiper-slide w-full md:w-1/3 px-2 mb-6">
+                                    <div class="bg-blue-500 rounded-lg overflow-hidden shadow-md h-full">
+                                        <div class="flex justify-center items-center px-6 pt-4">
+                                            <img class="w-2/3 h-2/3 object-cover" src="{{ asset($card['image_path']) }}"
+                                                alt="Image">
+                                        </div>
+                                        <div class="px-6 pt-2 pb-6">
+                                            <h2 class="text-xl text-white font-bold mb-2">{{ $card['title'] }}</h2>
+                                            <p class="text-gray-200">{{ $card['description'] }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     @endif
                 </div>

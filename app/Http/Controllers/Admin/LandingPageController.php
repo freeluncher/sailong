@@ -46,6 +46,8 @@ class LandingPageController extends Controller
             'cards.*.title' => 'required_with:cards|string|max:255',
             'cards.*.description' => 'required_with:cards|string',
             'cards.*.image_path' => 'required_with:cards|string|max:255',
+            'cards.*.url' => 'required_with:cards|string|max:255',
+
         ]);
 
         LandingPage::create($request->all());
@@ -69,6 +71,7 @@ class LandingPageController extends Controller
             'cards.*.title' => 'required_with:cards|string|max:255',
             'cards.*.description' => 'required_with:cards|string',
             'cards.*.image_path' => 'required_with:cards|string|max:255',
+            'cards.*.url' => 'required_with:cards|string|max:255',
         ]);
 
         $landingPage->update($request->all());
