@@ -21,7 +21,7 @@
                 <div class="swiper-wrapper">
                     @if (is_array($landingPage->cards))
                         @foreach ($landingPage->cards as $card)
-                            <a href="{{ $card['url'] }}">
+                            <a href="{{ route('accommodations.index') }}">
                                 <div class="swiper-slide w-full md:w-1/3 px-2 mb-6">
                                     <div class="bg-blue-500 rounded-lg overflow-hidden shadow-md h-full">
                                         <div class="flex justify-center items-center px-6 pt-4">
