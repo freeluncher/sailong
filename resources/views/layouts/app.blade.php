@@ -22,6 +22,7 @@
             <x-sidebar :menu="$menu" />
             <main class="flex-1 p-6">
                 @yield('content')
+                @yield('scripts')
             </main>
         </div>
         <!-- Footer -->

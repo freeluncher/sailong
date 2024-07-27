@@ -4,7 +4,7 @@
     <div class="container mx-auto p-4">
         <!-- Header Back Button -->
         <div class="mb-4">
-            <a href="#" class="text-yellow-500 hover:text-yellow-600">
+            <a href="{{ route('destinations.index') }}" class="text-yellow-500 hover:text-yellow-600">
                 <i class="fas fa-arrow-left"></i>
             </a>
         </div>

@@ -8,7 +8,7 @@
                 @foreach ($destinations as $destination)
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden w-full h-auto sm:w-60 md:w-64">
                         <div class="w-full h-64 md:h-64 overflow-hidden">
-                            <img class="object-cover w-full h-full" src="{{ asset('img/' . $destination->image) }}"
+                            <img class="object-cover w-full h-full" src="{{ Storage::url($destination->image) }}"
                                 alt="{{ $destination->name }}">
                         </div>
                         <div class="p-6">
