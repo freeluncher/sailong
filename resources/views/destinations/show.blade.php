@@ -1,48 +1,136 @@
 @extends('layouts.guest')
 
 @section('content')
-    <div class="relative h-screen w-full overflow-hidden">
-        <img src="{{ asset('img/' . $destination->image) }}" alt="{{ $destination->name }}"
-            class="absolute inset-0 w-full h-full object-cover">
-        <div class="absolute inset-0 bg-black bg-opacity-75"></div>
-        <div class="absolute left-12 top-24 inset-0 flex flex-col items-start justify-start">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl text-white font-bold">{{ $destination->name }}</h1>
-            <p class="text-lg md:text-xl lg:text-2xl text-white mt-4">{{ $destination->location }}</p>
-            <p class="text-lg md:text-xl lg:text-2xl text-white mt-4">{{ $destination->description }}</p>
-            <p class="text-lg md:text-xl lg:text-2xl text-white mt-4">Ticket Price: Rp{{ $destination->ticket_price }}</p>
+    <div class="container mx-auto p-4">
+        <!-- Header Back Button -->
+        <div class="mb-4">
+            <a href="#" class="text-yellow-500 hover:text-yellow-600">
+                <i class="fas fa-arrow-left"></i>
+            </a>
         </div>
-    </div>
-    <div class="mt-8 mx-auto px-10">
-        <div class="text-center mb-10">
-            <h3 class="text-4xl font-bold mb-4">Gallery</h3>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            @foreach ($destination->gallery as $gallery)
-                <div>
-                    <img src="{{ asset($gallery['image']) }}" alt="Gallery Image"
-                        class="w-full h-32 object-cover cursor-pointer"
-                        onclick="openModal('{{ asset($gallery['image']) }}')">
+
+        <!-- Image and Details Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Main Image -->
+                <div class="col-span-2 flex justify-center items-center">
+                    <img src="{{ asset('img/' . $destination->image) }}" alt="{{ $destination->name }}"
+                        class="rounded-lg w-full h-96 object-cover">
                 </div>
-            @endforeach
-        </div>
-    </div>
 
-    <!-- Modal -->
-    <div id="imageModal" class="hidden">
-        <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center">
-            <img id="modalImage" src="" alt="Full Screen Image" class="max-w-full max-h-full">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-white text-2xl">&times;</button>
+                <!-- Thumbnail Images -->
+                <div class="flex flex-col space-y-4">
+                    @foreach (array_slice($destination->gallery, 0, 2) as $item)
+                        <img src="{{ asset('img/' . $item['image']) }}" alt="Thumbnail"
+                            class="rounded-lg object-cover h-28 w-full">
+                    @endforeach
+                    <div class="relative" x-data="{ open: false }">
+                        <img src="{{ asset('img/' . $destination->image) }}" alt="Thumbnail 3"
+                            class="rounded-lg object-cover h-32 w-full cursor-pointer" @click="open = true">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg cursor-pointer"
+                            @click="open = true">
+                            <span class="text-white font-bold">Lihat semua foto</span>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-40"
+                            x-show="open" x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform scale-90"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-300"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-90">
+                            <div class="relative w-full h-full max-w-3xl">
+                                <div class="absolute top-2 right-2 z-50">
+                                    <button @click="open = false" class="text-white text-3xl">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="swiper-container w-full h-full">
+                                    <div class="swiper-wrapper">
+                                        @foreach ($destination->gallery as $item)
+                                            <div class="swiper-slide flex justify-center items-center">
+                                                <img src="{{ asset('img/' . $item['image']) }}" alt="Slide"
+                                                    class="w-auto h-full object-contain">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <!-- Add Pagination -->
+                                    <div class="swiper-pagination"></div>
+                                    <!-- Add Navigation -->
+                                    <div class="swiper-button-next z-50"></div>
+                                    <div class="swiper-button-prev z-50"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Title and Description -->
+            <div class="mt-6">
+                <h1 class="text-2xl font-bold">{{ $destination->name }}</h1>
+                <p class="mt-4 text-gray-700">
+                    {{ $destination->description }}
+                </p>
+            </div>
+
+            <!-- Info and Action Buttons -->
+            <div class="mt-6 flex flex-col md:flex-row justify-between items-center">
+                <!-- Location, Hours, Price -->
+                <div class="flex flex-col space-y-2 text-center md:text-left">
+                    <div class="flex items-center">
+                        <i class="fas fa-map-marker-alt text-yellow-500 mr-2"></i>
+                        <span>{{ $destination->location }}</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-clock text-yellow-500 mr-2"></i>
+                        <span>Buka
+                            {{ \Carbon\Carbon::createFromFormat('H:i:s', $destination->opening_hours)->format('H:i') }} -
+                            {{ \Carbon\Carbon::createFromFormat('H:i:s', $destination->closing_hours)->format('H:i') }}
+                            WIB</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-ticket-alt text-yellow-500 mr-2"></i>
+                        <span>{{ 'Rp ' . number_format($destination->ticket_price, 0, ',', '.') }}/tiket</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-2 mt-4 md:mt-0">
+                    @if (!empty($destination->action_buttons))
+                        <div class="mt-6 flex space-x-2">
+                            @foreach ($destination->action_buttons as $button)
+                                <a href="{{ $button['url'] }}"
+                                    class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 flex items-center space-x-2">
+                                    <i class="{{ $button['icon'] }}"></i>
+                                    <span>{{ $button['label'] }}</span>
+                                </a>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
     <script>
-        function openModal(imageSrc) {
-            document.getElementById('modalImage').src = imageSrc;
-            document.getElementById('imageModal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('imageModal').classList.add('hidden');
-            document.getElementById('modalImage').src = '';
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var swiper = new Swiper('.swiper-container', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        });
     </script>
 @endsection

@@ -7,7 +7,10 @@
     <title>{{ config('app.name', 'Sailong') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('custom-css')
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.2.2/dist/cdn.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://kit.fontawesome.com/79638a8e95.js" crossorigin="anonymous"></script>
 
 </head>
 

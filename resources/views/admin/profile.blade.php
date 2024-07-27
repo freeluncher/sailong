@@ -5,7 +5,7 @@
         <div class="max-w-lg mx-auto bg-white p-8 rounded shadow">
             <h2 class="text-2xl font-semibold mb-6">Edit Profile</h2>
 
-            <form action="{{ route('user.updateProfile') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.updateProfile') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -42,11 +42,19 @@
         </div>
     </div>
 @endsection
-
 @php
-    $user = Auth::user();
     $menu = [
-        ['name' => 'Bookings', 'url' => route('user.bookings', ['name' => $user->name])],
-        ['name' => 'Settings', 'url' => route('user.profile', ['name' => $user->name])],
+        [
+            'name' => 'Users',
+            'url' => '#',
+            'icon' => 'fa-solid fa-user',
+            'submenu' => [
+                ['name' => 'All Users', 'url' => route('users.index'), 'icon' => 'fa-solid fa-users'],
+                ['name' => 'Roles', 'url' => route('roles.index'), 'icon' => 'fa-solid fa-masks-theater'],
+                ['name' => 'Permissions', 'url' => route('permissions.index'), 'icon' => 'fa-solid fa-key'],
+            ],
+        ],
+        ['name' => 'Settings', 'url' => route('admin.settings'), 'icon' => 'fa-solid fa-gear'],
+        ['name' => 'Landing Pages', 'url' => route('landing-pages.index'), 'icon' => 'fa-solid fa-pager'],
     ];
 @endphp

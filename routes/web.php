@@ -80,9 +80,16 @@ Route::middleware(['auth', 'role:admin', 'PreventBackHistory'])->group(function 
     Route::resource('admin/permissions', PermissionController::class);
     Route::get('admin/roles/{role}/permissions', [RolePermissionController::class, 'edit'])->name('roles.permissions.edit');
     Route::post('admin/roles/{role}/permissions', [RolePermissionController::class, 'update'])->name('roles.permissions.update');
-
     Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
+    Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+    Route::put('/admin/profile', [AdminController::class, 'updateProfile'])->name('admin.updateProfile');
     Route::resource('admin/landing-pages', LandingPageController::class);
+    Route::get('/admin/destinations', [DestinationController::class, 'manage'])->name('admin.destinations.manage');
+    Route::get('/admin/destinations/create', [DestinationController::class, 'create'])->name('admin.destinations.create');
+    Route::post('/admin/destinations', [DestinationController::class, 'store'])->name('admin.destinations.store');
+    Route::get('/admin/destinations/{destination}/edit', [DestinationController::class, 'edit'])->name('admin.destinations.edit');
+    Route::put('/admin/destinations/{destination}', [DestinationController::class, 'update'])->name('admin.destinations.update');
+    Route::delete('/admin/destinations/{destination}', [DestinationController::class, 'destroy'])->name('admin.destinations.destroy');
 });
 
 //<----------- Homestay Route -------------->
@@ -90,10 +97,13 @@ Route::middleware(['auth', 'role:homestay', 'PreventBackHistory'])->group(functi
     Route::get('/homestay/dashboard', [HomestayController::class, 'showHomestayDashboardPage'])->name('homestay.dashboard');
     Route::get('/homestay/reservations', [HomestayController::class, 'reservations'])->name('homestay.reservations');
     Route::get('/homestay/settings', [HomestayController::class, 'settings'])->name('homestay.settings');
+    Route::get('/homestay/profile', [HomestayController::class, 'profile'])->name('homestay.profile');
+    Route::put('/homestay/profile', [HomestayController::class, 'updateProfile'])->name('homestay.updateProfile');
 });
 //<----------- User Route -------------->
 Route::middleware(['auth', 'role:user', 'PreventBackHistory'])->group(function () {
     Route::get('/{name}/dashboard', [UserController::class, 'showUserDashboardPage'])->name('user.dashboard');
     Route::get('/{name}/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::put('/{name}/profile', [UserController::class, 'updateProfile'])->name('user.updateProfile');
     Route::get('/{name}/bookings', [UserController::class, 'bookings'])->name('user.bookings');
 });

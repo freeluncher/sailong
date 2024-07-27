@@ -5,7 +5,7 @@
         <div class="max-w-lg mx-auto bg-white p-8 rounded shadow">
             <h2 class="text-2xl font-semibold mb-6">Edit Profile</h2>
 
-            <form action="{{ route('user.updateProfile') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('homestay.updateProfile') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -42,11 +42,9 @@
         </div>
     </div>
 @endsection
-
 @php
-    $user = Auth::user();
     $menu = [
-        ['name' => 'Bookings', 'url' => route('user.bookings', ['name' => $user->name])],
-        ['name' => 'Settings', 'url' => route('user.profile', ['name' => $user->name])],
+        ['name' => 'Reservations', 'url' => route('homestay.reservations')],
+        ['name' => 'Settings', 'url' => route('homestay.settings')],
     ];
 @endphp
