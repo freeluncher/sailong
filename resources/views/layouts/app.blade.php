@@ -45,6 +45,11 @@
                                 'url' => route('admin.destinations.manage'),
                                 'icon' => 'fa-solid fa-location-dot',
                             ],
+                            [
+                                'name' => 'Accommodations',
+                                'url' => route('accommodations.index'),
+                                'icon' => 'fa-solid fa-location-dot',
+                            ],
                         ],
                     ],
                 ];

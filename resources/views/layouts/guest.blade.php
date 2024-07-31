@@ -24,6 +24,7 @@
     </div>
     <div id="main" class="w-full mx-auto h-screen items-center">
         @yield('content')
+        @yield('scripts')
         @include('components.footer')
     </div>
 </body>

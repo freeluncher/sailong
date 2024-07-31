@@ -40,18 +40,18 @@
                             x-transition:leave="transition ease-in duration-300"
                             x-transition:leave-start="opacity-100 transform scale-100"
                             x-transition:leave-end="opacity-0 transform scale-90">
-                            <div class="relative w-full h-full max-w-3xl">
+                            <div class="relative w-full h-full">
                                 <div class="absolute top-2 right-2 z-50">
                                     <button @click="open = false" class="text-white text-3xl">
                                         <i class="fas fa-times"></i>
                                     </button>
                                 </div>
-                                <div class="swiper-container w-full h-full">
+                                <div class="swiper-container w-full h-full flex justify-center content-center">
                                     <div class="swiper-wrapper">
                                         @foreach ($destination->gallery as $item)
-                                            <div class="swiper-slide flex justify-center items-center">
+                                            <div class="swiper-slide flex justify-center content-center">
                                                 <img src="{{ asset('img/' . $item['image']) }}" alt="Slide"
-                                                    class="w-auto h-full object-contain">
+                                                    class="w-auto h-1/2 object-contain max-h-full max-w-full mx-auto flex content-center">
                                             </div>
                                         @endforeach
                                     </div>

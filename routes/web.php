@@ -16,6 +16,7 @@ use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\TourController;
+use App\Http\Controllers\Admin\AccommodationController as AdminAccommodationController;
 
 Route::get('/', function () {
     $activePage = \App\Models\LandingPage::where('is_active', true)->first();
@@ -84,12 +85,15 @@ Route::middleware(['auth', 'role:admin', 'PreventBackHistory'])->group(function 
     Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::put('/admin/profile', [AdminController::class, 'updateProfile'])->name('admin.updateProfile');
     Route::resource('admin/landing-pages', LandingPageController::class);
+    //Route untuk Admin Destinations
     Route::get('/admin/destinations', [DestinationController::class, 'manage'])->name('admin.destinations.manage');
     Route::get('/admin/destinations/create', [DestinationController::class, 'create'])->name('admin.destinations.create');
     Route::post('/admin/destinations', [DestinationController::class, 'store'])->name('admin.destinations.store');
     Route::get('/admin/destinations/{destination}/edit', [DestinationController::class, 'edit'])->name('admin.destinations.edit');
     Route::put('/admin/destinations/{destination}', [DestinationController::class, 'update'])->name('admin.destinations.update');
     Route::delete('/admin/destinations/{destination}', [DestinationController::class, 'destroy'])->name('admin.destinations.destroy');
+    // Route untuk Admin Accommodations
+    Route::resource('accommodations', AdminAccommodationController::class);
 });
 
 //<----------- Homestay Route -------------->
