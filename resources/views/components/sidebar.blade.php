@@ -2,7 +2,7 @@
 
 <div x-data="{ open: true }" class="flex">
     <div :class="open ? 'w-64' : 'w-16'"
-        class="bg-gray-800 text-white space-y-6 py-7 px-2 transition-all duration-300 h-screen flex flex-col items-center relative">
+        class="bg-gray-800 text-white space-y-6 py-7 px-2 transition-all duration-300 h-full flex flex-col items-center relative">
         <button @click="open = !open" class="text-white focus:outline-none absolute top-4 right-4">
             <i x-show="open" class="fas fa-angle-double-left"></i>
             <i x-show="!open" class="fas fa-angle-double-right"></i>
