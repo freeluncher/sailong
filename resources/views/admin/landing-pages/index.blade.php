@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <h1 class="text-2xl font-bold mb-6">Manage Landing Pages</h1>
     <a href="{{ route('landing-pages.create') }}" class="bg-blue-500 text-white px-4 py-2">Create New Page</a>
 
@@ -50,4 +51,5 @@
             <p>No landing pages found.</p>
         </div>
     @endif
+
 @endsection
