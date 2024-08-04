@@ -48,7 +48,12 @@
                             [
                                 'name' => 'Accommodations',
                                 'url' => route('accommodations.index'),
-                                'icon' => 'fa-solid fa-location-dot',
+                                'icon' => 'fa-solid fa-hotel',
+                            ],
+                            [
+                                'name' => 'Cuisines',
+                                'url' => route('admin.cuisines.index'),
+                                'icon' => 'fa-solid fa-utensils',
                             ],
                         ],
                     ],

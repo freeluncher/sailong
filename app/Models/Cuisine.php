@@ -14,8 +14,12 @@ class Cuisine extends Model
         'location',
         'image',
         'gallery',
+        'opening_hours',
+        'closing_hours',
+        'action_buttons', // tambahkan ini
     ];
      protected $casts = [
         'gallery' => 'array',
+        'action_buttons' => 'array',
     ];
 }

@@ -15,9 +15,11 @@ class Tour extends Model
         'duration',
         'image',
         'gallery',
+        'action_buttons', // tambahkan ini
     ];
      protected $casts = [
         'gallery' => 'array',
+        'action_buttons' => 'array',
     ];
 
     public function bookings()

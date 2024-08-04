@@ -17,6 +17,7 @@ use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\Admin\AccommodationController as AdminAccommodationController;
+use App\Http\Controllers\Admin\AdminCuisineController;
 
 Route::get('/', function () {
     $activePage = \App\Models\LandingPage::where('is_active', true)->first();
@@ -94,6 +95,10 @@ Route::middleware(['auth', 'role:admin', 'PreventBackHistory'])->group(function 
     Route::delete('/admin/destinations/{destination}', [DestinationController::class, 'destroy'])->name('admin.destinations.destroy');
     // Route untuk Admin Accommodations
     Route::resource('accommodations', AdminAccommodationController::class);
+    // Route untuk Admin Cuisines
+    Route::get('/admin/cuisines/', [AdminCuisineController::class, 'index'])->name('admin.cuisines.index');
+    Route::get('/admin/cuisines/{id}/edit', [AdminCuisineController::class, 'edit'])->name('admin.cuisines.edit');
+    Route::put('/admin/cuisines/{id}', [AdminCuisineController::class, 'update'])->name('admin.cuisines.update');
 });
 
 //<----------- Homestay Route -------------->

@@ -15,9 +15,13 @@ class Accommodation extends Model
         'image',
         'price_per_night',
         'gallery',
+        'check_in_hours',
+        'check_out_hours',
+        'action_buttons', // tambahkan ini
     ];
      protected $casts = [
         'gallery' => 'array',
+        'action_buttons' => 'array',
     ];
 
     public function bookings()
