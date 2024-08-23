@@ -61,7 +61,7 @@
             @endphp
             <x-sidebar :menu="$menu" />
             <main class="flex-1 flex flex-col pt-6 pb-0 px-0">
-                <div class="flex-1 px-4 overflow-auto">
+                <div class="flex-1 px-4 overflow-auto h-screen">
                     @yield('content')
                 </div>
                 @yield('scripts')

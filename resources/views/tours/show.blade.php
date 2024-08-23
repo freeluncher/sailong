@@ -4,7 +4,7 @@
     <div class="container mx-auto p-4">
         <!-- Header Back Button -->
         <div class="mb-4">
-            <a href="{{ route('tour.index') }}" class="text-yellow-500 hover:text-yellow-600">
+            <a href="{{ route('tours.index') }}" class="text-yellow-500 hover:text-yellow-600">
                 <i class="fas fa-arrow-left"></i>
             </a>
         </div>
@@ -85,10 +85,7 @@
                     </div>
                     <div class="flex items-center">
                         <i class="fas fa-clock text-yellow-500 mr-2"></i>
-                        <span>Buka
-                            {{ \Carbon\Carbon::createFromFormat('H:i:s', $tour->opening_hours)->format('H:i') }} -
-                            {{ \Carbon\Carbon::createFromFormat('H:i:s', $tour->closing_hours)->format('H:i') }}
-                            WIB</span>
+                        <span>Duration : 2 Days</span>
                     </div>
                     <div class="flex items-center">
                         <i class="fas fa-ticket-alt text-yellow-500 mr-2"></i>

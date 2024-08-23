@@ -17,6 +17,15 @@
             <p class="text-white text-center mb-2 text-sm sm:text-base">Didukung oleh:</p>
             <div
                 class="flex flex-wrap justify-center items-center space-x-0 space-y-2 sm:space-x-8 sm:space-y-4 md:space-y-0">
+
+                <div class="flex flex-col md:flex-row items-center space-x-2">
+                    <img src="{{ asset('img/logo-poldajateng.png') }}" alt="Instansi 3" class="h-10 sm:h-12">
+                    <div class="flex flex-col items-center md:items-start">
+                        <p class="text-white font-bold text-xl sm:text-2xl">POKDARWIS</p>
+                        <p class="text-white text-xs sm:text-sm">gunung sari</p>
+                    </div>
+                </div>
+
                 <div class="flex flex-col md:flex-row items-center space-x-2 lg:">
                     <img src="{{ asset('img/logo-disbudpar-trans.png') }}" alt="Instansi 1" class="h-10 sm:h-12 pt-2">
                     <div class="flex flex-col items-center md:items-start">
@@ -24,18 +33,12 @@
                         <p class="text-white text-xs sm:text-sm">pariwisata.semarangkota.go.id</p>
                     </div>
                 </div>
+
                 <div class="flex flex-col md:flex-row items-center space-x-2">
                     <img src="{{ asset('img/logo-perhutani.png') }}" alt="Instansi 2" class="h-14 sm:h-16">
                     <div class="flex flex-col items-center md:items-start">
                         <p class="text-white font-bold text-xl sm:text-2xl">Perhutani</p>
                         <p class="text-white text-xs sm:text-sm">semarang</p>
-                    </div>
-                </div>
-                <div class="flex flex-col md:flex-row items-center space-x-2">
-                    <img src="{{ asset('img/logo-poldajateng.png') }}" alt="Instansi 3" class="h-10 sm:h-12">
-                    <div class="flex flex-col items-center md:items-start">
-                        <p class="text-white font-bold text-xl sm:text-2xl">POKDARWIS</p>
-                        <p class="text-white text-xs sm:text-sm">gunung sari</p>
                     </div>
                 </div>
             </div>

@@ -27,7 +27,7 @@ class LoginController extends Controller
             $name = $user->name;
 
             if ($user->hasRole('admin')) {
-                return redirect()->intended("/$name/dashboard");
+                return redirect()->intended("/admin/dashboard");
             } elseif ($user->hasRole('homestay')) {
                 return redirect()->intended("/$name/dashboard");
             } else {
