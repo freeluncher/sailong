@@ -14,19 +14,29 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <!-- Main Image -->
                 <div class="col-span-2 flex justify-center items-center">
-                    <img src="{{ asset('img/' . $accommodation->image) }}" alt="{{ $accommodation->name }}"
+                    <img src="{{ Storage::url('img/' . $accommodation->image) }}" alt="{{ $accommodation->name }}"
                         class="rounded-lg w-full h-96 object-cover">
                 </div>
 
                 <!-- Thumbnail Images -->
                 <div class="flex flex-col space-y-4">
                     @foreach (array_slice($accommodation->gallery, 0, 2) as $item)
-                        <img src="{{ asset('img/' . $item['image']) }}" alt="Thumbnail"
-                            class="rounded-lg object-cover h-28 w-full">
+                        @if (isset($item['image']))
+                            <img src="{{ Storage::url('img/' . $item['image']) }}" alt="Thumbnail"
+                                class="rounded-lg object-cover h-28 w-full">
+                        @else
+                            <img src="{{ Storage::url('img/default-thumbnail.jpg') }}" alt="Default Thumbnail"
+                                class="rounded-lg object-cover h-28 w-full">
+                        @endif
                     @endforeach
                     <div class="relative" x-data="{ open: false }">
-                        <img src="{{ asset('img/' . $accommodation->image) }}" alt="Thumbnail 3"
-                            class="rounded-lg object-cover h-32 w-full cursor-pointer" @click="open = true">
+                        @if (isset($accommodation->image))
+                            <img src="{{ Storage::url('img/' . $accommodation->image) }}" alt="Thumbnail 3"
+                                class="rounded-lg object-cover h-32 w-full cursor-pointer" @click="open = true">
+                        @else
+                            <img src="{{ Storage::url('img/default-thumbnail.jpg') }}" alt="Default Thumbnail 3"
+                                class="rounded-lg object-cover h-32 w-full cursor-pointer" @click="open = true">
+                        @endif
                         <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg cursor-pointer"
                             @click="open = true">
                             <span class="text-white font-bold">Lihat semua foto</span>
@@ -49,10 +59,12 @@
                                 <div class="swiper-container w-full h-full flex justify-center items-center">
                                     <div class="swiper-wrapper">
                                         @foreach ($accommodation->gallery as $item)
-                                            <div class="swiper-slide flex justify-center items-center">
-                                                <img src="{{ asset('img/' . $item['image']) }}" alt="Slide"
-                                                    class="w-auto h-auto object-contain max-h-full max-w-full mx-auto">
-                                            </div>
+                                            @if (isset($item['image']))
+                                                <div class="swiper-slide flex justify-center items-center">
+                                                    <img src="{{ Storage::url('img/' . $item['image']) }}" alt="Slide"
+                                                        class="w-auto h-auto object-contain max-h-full max-w-full mx-auto">
+                                                </div>
+                                            @endif
                                         @endforeach
                                     </div>
                                     <!-- Add Pagination -->
@@ -65,6 +77,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <!-- Title and Description -->

@@ -30,7 +30,7 @@
                     <label for="image" class="block text-gray-700">Image</label>
                     <input type="file" name="image" id="image" class="w-full p-2 border rounded-lg">
                     @if ($cuisine->image)
-                        <img src="{{ asset('img/' . $cuisine->image) }}" alt="{{ $cuisine->name }}"
+                        <img src="{{ Storage::url('img/' . $cuisine->image) }}" alt="{{ $cuisine->name }}"
                             class="mt-2 w-32 h-32 object-cover">
                     @endif
                     @error('image')
@@ -65,14 +65,14 @@
                     @enderror
                 </div>
 
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label for="ticket_price" class="block text-gray-700">Ticket Price</label>
                     <input type="number" name="ticket_price" id="ticket_price"
                         value="{{ old('ticket_price', $cuisine->ticket_price) }}" class="w-full p-2 border rounded-lg">
                     @error('ticket_price')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
 
                 <div class="mb-4">
                     <label for="gallery" class="block text-gray-700">Gallery Images</label>
@@ -80,7 +80,7 @@
                     @if ($cuisine->gallery)
                         <div class="mt-2 flex flex-wrap">
                             @foreach ($cuisine->gallery as $item)
-                                <img src="{{ asset('img/' . $item['image']) }}" alt="Gallery Image"
+                                <img src="{{ Storage::url('img/' . $item['image']) }}" alt="Gallery Image"
                                     class="w-32 h-32 object-cover m-2">
                             @endforeach
                         </div>

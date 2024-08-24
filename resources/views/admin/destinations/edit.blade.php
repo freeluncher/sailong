@@ -54,17 +54,19 @@
                     <div class="mb-4">
                         <label for="image" class="block text-gray-700">Main Image</label>
                         <input type="file" name="image" id="image" class="w-full border-gray-300 rounded-lg p-2">
-                        <img src="{{ asset('img/' . $destination->image) }}" alt="{{ $destination->name }}"
-                            class="mt-4 h-32 rounded-lg">
+                        @if ($destination->image)
+                            <img src="{{ Storage::url('img/' . $destination->image) }}" alt="{{ $destination->name }}"
+                                class="mt-4 h-32 rounded-lg">
+                        @endif
                     </div>
 
                     <div class="mb-4">
                         <label for="gallery" class="block text-gray-700">Gallery</label>
-                        <input type="file" name="gallery[]" id="gallery" class="w-full border-gray-300 rounded-lg p-2"
-                            multiple>
-                        <div class="flex flex-wrap mt-2 space-x-2">
+                        <input type="file" name="gallery[]" id="gallery_input"
+                            class="w-full border-gray-300 rounded-lg p-2" multiple>
+                        <div id="gallery_preview" class="flex flex-wrap mt-2 space-x-2">
                             @foreach ($destination->gallery as $item)
-                                <img src="{{ asset('img/' . $item['image']) }}" alt="Gallery Image"
+                                <img src="{{ Storage::url($item['image']) }}" alt="Gallery Image"
                                     class="h-32 rounded-lg mx-1 my-2">
                             @endforeach
                         </div>
@@ -107,27 +109,66 @@
 @section('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('add_button').addEventListener('click', function() {
-                const container = document.getElementById('action_buttons_container');
-                const index = container.children.length; // Ensure the index is always an integer
-                const div = document.createElement('div');
-                div.classList.add('flex', 'space-x-4', 'mb-2');
-                div.innerHTML = `
-                    <input type="text" name="action_buttons[${index}][label]" placeholder="Button Label" class="w-full border-gray-300 rounded-lg p-2">
-                    <input type="text" name="action_buttons[${index}][icon]" placeholder="Button Icon" class="w-full border-gray-300 rounded-lg p-2">
-                    <input type="text" name="action_buttons[${index}][url]" placeholder="Button URL" class="w-full border-gray-300 rounded-lg p-2">
+            const galleryInput = document.getElementById('gallery_input');
+            const galleryPreview = document.getElementById('gallery_preview');
+
+            galleryInput.addEventListener('change', function(event) {
+                galleryPreview.innerHTML = ''; // Kosongkan pratinjau saat gambar baru dipilih
+
+                Array.from(event.target.files).forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imgDiv = document.createElement('div');
+                        imgDiv.classList.add('relative');
+
+                        imgDiv.innerHTML = `
+                            <img src="${e.target.result}" alt="Gallery Image" class="h-32 rounded-lg mx-1 my-2">
+                            <button type="button" data-index="${index}" class="absolute top-0 right-0 text-red-500 hover:text-red-700 remove-gallery-image">&times;</button>
+                        `;
+
+                        galleryPreview.appendChild(imgDiv);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            });
+
+            galleryPreview.addEventListener('click', function(event) {
+                if (event.target.classList.contains('remove-gallery-image')) {
+                    const index = event.target.getAttribute('data-index');
+                    const files = Array.from(galleryInput.files);
+
+                    files.splice(index, 1); // Hapus file dari array
+
+                    // Buat ulang FileList dari array files yang sudah dimodifikasi
+                    const dataTransfer = new DataTransfer();
+                    files.forEach(file => dataTransfer.items.add(file));
+                    galleryInput.files = dataTransfer.files;
+
+                    event.target.closest('div').remove(); // Hapus pratinjau gambar
+                }
+            });
+
+            const addButton = document.getElementById('add_button');
+            const actionButtonsContainer = document.getElementById('action_buttons_container');
+
+            addButton.addEventListener('click', function() {
+                const newIndex = actionButtonsContainer.children.length;
+
+                const actionButtonDiv = document.createElement('div');
+                actionButtonDiv.classList.add('flex', 'space-x-4', 'mb-2');
+
+                actionButtonDiv.innerHTML = `
+                    <input type="text" name="action_buttons[${newIndex}][label]" placeholder="Button Label" class="w-full border-gray-300 rounded-lg p-2">
+                    <input type="text" name="action_buttons[${newIndex}][icon]" placeholder="Button Icon" class="w-full border-gray-300 rounded-lg p-2">
+                    <input type="text" name="action_buttons[${newIndex}][url]" placeholder="Button URL" class="w-full border-gray-300 rounded-lg p-2">
                     <button type="button" class="text-red-500 hover:text-red-700" onclick="this.parentElement.remove()">Remove</button>
                 `;
-                container.appendChild(div);
+
+                actionButtonsContainer.appendChild(actionButtonDiv);
             });
         });
     </script>
 @endsection
-
-
-
-
-
 
 @php
     $menu = [

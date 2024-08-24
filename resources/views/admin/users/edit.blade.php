@@ -28,19 +28,24 @@
             </div>
             <div class="mb-4">
                 <label for="roles" class="block text-gray-700">Roles</label>
-                <select name="roles[]" id="roles" multiple class="w-full border border-gray-300 rounded px-4 py-2">
+                <div class="flex flex-wrap">
                     @foreach ($roles as $role)
-                        <option value="{{ $role->name }}"
-                            {{ $user->roles->contains('name', $role->name) ? 'selected' : '' }}>
-                            {{ $role->name }}
-                        </option>
+                        <label class="inline-flex items-center mr-4">
+                            <input type="radio" name="roles[]" value="{{ $role->name }}"
+                                {{ $user->roles->contains('name', $role->name) ? 'checked' : '' }}
+                                class="form-radio h-5 w-5 text-blue-600">
+                            <span class="ml-2 text-gray-700">{{ $role->name }}</span>
+                        </label>
                     @endforeach
-                </select>
+                </div>
             </div>
             <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Update</button>
         </form>
     </div>
 @endsection
+
+
+
 
 @php
     $menu = [

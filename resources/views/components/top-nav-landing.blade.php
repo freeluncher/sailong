@@ -1,8 +1,8 @@
 <!-- Navbar for medium to large screens -->
 <div class="bg-transparent w-full py-4 px-6 flex justify-between items-center absolute top-0 left-0 z-50 hidden lg:flex">
     <a href="/" class="flex items-center space-x-2">
-        <img src="{{ asset('img/logo-sailong.png') }}" alt="Logo" class="h-10 w-auto object-cover">
-        <span class="text-white font-bold text-2xl">Sailong</span>
+        <img src="{{ Storage::url('img/logo-sailong.png') }}" alt="Logo" class="h-10 w-auto object-cover">
+        <span class="text-white font-bold text-2xl mt-2">Sailong</span>
     </a>
     <div class="flex items-center space-x-4 ml-auto">
         <div class="relative" x-data="{ informasiOpen: false }">
@@ -72,7 +72,7 @@
 <div class="fixed inset-0 z-50 flex flex-col lg:hidden" x-data="{ open: false, informasiOpen: false }">
     <div class="flex justify-between items-center bg-black p-4">
         <a href="/" class="flex items-center space-x-2">
-            <img src="{{ asset('img/logo-sailong.png') }}" alt="Logo" class="h-10 w-auto object-cover">
+            <img src="{{ Storage::url('img/logo-sailong.png') }}" alt="Logo" class="h-10 w-auto object-cover">
             <span class="text-white font-bold text-2xl">Sailong</span>
         </a>
         <button @click="open = !open" class="text-white focus:outline-none bg-black p-2 rounded">

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('content')
     <div class="container mx-auto p-4">
@@ -14,7 +14,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <!-- Main Image -->
                 <div class="col-span-2">
-                    <img src="https://via.placeholder.com/600x400" alt="Curug Lawe Secepit"
+                    <img src="{{ Storage::url($destination->image) }}" alt="Curug Lawe Secepit"
                         class="rounded-lg w-full h-full object-cover">
                 </div>
 

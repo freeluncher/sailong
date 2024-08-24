@@ -1,8 +1,8 @@
 <div class="bg-opacity-0 shadow-md w-full py-4 px-6 flex justify-between items-center" x-data="{ open: false, infoOpen: false }">
     <div class="flex items-center space-x-4">
         <a href="/" class="flex items-center space-x-2">
-            <img src="{{ asset('img/logo-sailong-alt.png') }}" alt="Logo" class="h-10 w-full object-cover">
-            <span class="text-gray-600 font-bold text-2xl">Sailong</span>
+            <img src="{{ Storage::url('img/logo-sailong-alt.png') }}" alt="Logo" class="h-10 w-full object-cover">
+            <span class="text-gray-600 font-bold text-2xl mt-2">Sailong</span>
         </a>
         <button @click="open = !open" class="text-gray-600 focus:outline-none lg:hidden">
             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -23,7 +23,7 @@
                 x-transition:leave-start="opacity-100 transform scale-100"
                 x-transition:leave-end="opacity-0 transform scale-95"
                 class="absolute mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50" x-cloak>
-                <a href="{{ route('accommodations.index') }}"
+                <a href="{{ route('public-accommodations.index') }}"
                     class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Accommodations</a>
                 <a href="{{ route('tours.index') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Tours</a>
                 <a href="{{ route('cuisines.index') }}"

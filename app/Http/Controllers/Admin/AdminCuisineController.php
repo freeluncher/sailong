@@ -28,7 +28,6 @@ class AdminCuisineController extends Controller
             'location' => 'required|string|max:255',
             'opening_hours' => 'required|date_format:H:i',
             'closing_hours' => 'required|date_format:H:i',
-            'ticket_price' => 'required|numeric',
             'gallery.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'action_buttons' => 'nullable|json',
         ]);
@@ -39,7 +38,6 @@ class AdminCuisineController extends Controller
         $cuisine->location = $request->location;
         $cuisine->opening_hours = $request->opening_hours;
         $cuisine->closing_hours = $request->closing_hours;
-        $cuisine->ticket_price = $request->ticket_price;
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('cuisines', 'public');

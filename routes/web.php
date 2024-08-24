@@ -14,10 +14,10 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\DestinationController;
-use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\Admin\AccommodationController as AdminAccommodationController;
 use App\Http\Controllers\Admin\AdminCuisineController;
+use App\Http\Controllers\AccommodationController;
 
 Route::get('/', function () {
     $activePage = \App\Models\LandingPage::where('is_active', true)->first();
@@ -32,8 +32,8 @@ Route::get('/landing-page/{id}', [LandingPageController::class, 'show'])->name('
 Route::post('landing-pages/{landingPage}/activate', [LandingPageController::class, 'activate'])->name('landing-pages.activate');
 Route::get('/destinations', [DestinationController::class, 'index'])->name('destinations.index');
 Route::get('destinations/{destination}', [DestinationController::class, 'show'])->name('destinations.show');
-Route::get('/accommodations', [AccommodationController::class, 'index'])->name('accommodations.index');
-Route::get('accommodations/{accommodation}', [AccommodationController::class, 'show'])->name('accommodations.show');
+Route::get('/accommodations', [AccommodationController::class, 'index'])->name('public-accommodations.index');
+Route::get('accommodations/{accommodation}', [AccommodationController::class, 'show'])->name('public-accommodations.show');
 Route::get('/tours', [TourController::class, 'index'])->name('tours.index');
 Route::get('tours/{tour}', [TourController::class, 'show'])->name('tours.show');
 Route::get('/cuisines', [CuisineController::class, 'index'])->name('cuisines.index');
@@ -94,7 +94,7 @@ Route::middleware(['auth', 'role:admin', 'PreventBackHistory'])->group(function 
     Route::put('/admin/destinations/{destination}', [DestinationController::class, 'update'])->name('admin.destinations.update');
     Route::delete('/admin/destinations/{destination}', [DestinationController::class, 'destroy'])->name('admin.destinations.destroy');
     // Route untuk Admin Accommodations
-    Route::resource('accommodations', AdminAccommodationController::class);
+    Route::resource('admin/accommodations', AdminAccommodationController::class);
     // Route untuk Admin Cuisines
     Route::get('/admin/cuisines/', [AdminCuisineController::class, 'index'])->name('admin.cuisines.index');
     Route::get('/admin/cuisines/{id}/edit', [AdminCuisineController::class, 'edit'])->name('admin.cuisines.edit');

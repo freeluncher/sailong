@@ -15,8 +15,8 @@ class Accommodation extends Model
         'image',
         'price_per_night',
         'gallery',
-        'check_in_hours',
-        'check_out_hours',
+        'opening_hours',
+        'closing_hours',
         'action_buttons', // tambahkan ini
     ];
      protected $casts = [
@@ -28,4 +28,8 @@ class Accommodation extends Model
     {
         return $this->hasMany(Booking::class);
     }
+    public function getActionButtonsAttribute($value)
+{
+    return $value ? json_decode($value, true) : [];
+}
 }

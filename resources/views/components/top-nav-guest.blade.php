@@ -1,7 +1,8 @@
 <div class="bg-white shadow-md w-full py-4 px-6 flex justify-between items-center absolute top-0 z-50">
-    <div class="flex items-center">
-        <a href="{{ url('/') }}" class="text-gray-800 text-lg font-bold">{{ config('app.name', 'Laravel') }}</a>
-    </div>
+    <a href="/" class="flex items-center space-x-2">
+        <img src="{{ Storage::url('img/logo-sailong-alt.png') }}" alt="Logo" class="h-10 w-auto object-cover">
+        <span class="text-black font-bold text-2xl mt-2">Sailong</span>
+    </a>
     <div class="hidden md:flex items-center space-x-4">
         <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-800">Login</a>
         <a href="{{ route('register') }}" class="text-gray-600 hover:text-gray-800">Register</a>

@@ -6,10 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Validation\ValidationException;
 use App\Models\User;
-use Spatie\Permission\Traits\HasRoles;
-
-
 
 class LoginController extends Controller
 {
@@ -17,10 +15,18 @@ class LoginController extends Controller
     {
         return view('auth.login');
     }
+
     public function login(Request $request)
     {
+        // Validasi input
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string|min:6',
+        ]);
+
         $credentials = $request->only('email', 'password');
-         $remember = $request->has('remember'); // Check if 'remember' field is present
+        $remember = $request->has('remember'); // Check if 'remember' field is present
+
         if (Auth::attempt($credentials, $remember)) {
             /** @var \App\Models\User */
             $user = Auth::user();
@@ -34,8 +40,13 @@ class LoginController extends Controller
                 return redirect()->intended("/$name/dashboard");
             }
         }
-        return back()->withErrors(['email' => 'Email atau password yang anda gunakan salah']);
+
+        // Jika login gagal, kembalikan ke halaman login dengan pesan error
+        return back()->withErrors([
+            'email' => 'Email atau password yang anda gunakan salah',
+        ])->withInput($request->except('password'));
     }
+
     public function logout()
     {
         Auth::logout();
