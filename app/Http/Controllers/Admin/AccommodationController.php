@@ -34,8 +34,8 @@ class AccommodationController extends Controller
             'price_per_night' => 'required|numeric',
             'gallery' => 'nullable|array',
             'gallery.*' => 'image',
-            'opening_hours' => 'date_format:H:i',
-            'closing_hours' => 'date_format:H:i',
+            'opening_hours' => 'nullable',
+            'closing_hours' => 'nullable',
             'action_buttons' => 'nullable|array',
         ]);
 

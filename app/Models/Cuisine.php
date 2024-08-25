@@ -22,4 +22,7 @@ class Cuisine extends Model
         'gallery' => 'array',
         'action_buttons' => 'array',
     ];
+    protected $attributes = [
+        'action_buttons' => '[]', // Default value sebagai array kosong
+    ];
 }

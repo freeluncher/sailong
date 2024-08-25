@@ -8,7 +8,7 @@
                 @foreach ($cuisines as $cuisine)
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden w-full h-auto sm:w-60 md:w-64">
                         <div class="h-48 w-full overflow-hidden">
-                            <img class="object-cover w-full h-full" src="{{ Storage::url('img/' . $cuisine->image) }}"
+                            <img class="object-cover w-full h-full" src="{{ Storage::url($cuisine->image) }}"
                                 alt="{{ $cuisine->name }}">
                         </div>
                         <div class="p-6">

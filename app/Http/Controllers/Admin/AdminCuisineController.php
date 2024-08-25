@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cuisine;
+use Illuminate\Support\Facades\Log;
 
 class AdminCuisineController extends Controller
 {
@@ -13,51 +14,65 @@ class AdminCuisineController extends Controller
         $cuisines = Cuisine::all();
         return view('admin.cuisines.index', compact('cuisines'));
     }
+
     public function edit($id)
     {
         $cuisine = Cuisine::findOrFail($id);
+
+        // Pastikan action_buttons selalu berupa array
+        $cuisine->action_buttons = $cuisine->action_buttons ?? [];
+
         return view('admin.cuisines.edit', compact('cuisine'));
     }
 
+
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'location' => 'required|string|max:255',
-            'opening_hours' => 'required|date_format:H:i',
-            'closing_hours' => 'required|date_format:H:i',
-            'gallery.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'action_buttons' => 'nullable|json',
-        ]);
+        // Logging request data
+        Log::info('Update request data:', $request->all());
 
         $cuisine = Cuisine::findOrFail($id);
-        $cuisine->name = $request->name;
-        $cuisine->description = $request->description;
-        $cuisine->location = $request->location;
-        $cuisine->opening_hours = $request->opening_hours;
-        $cuisine->closing_hours = $request->closing_hours;
+        $cuisine->update($request->all());
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('cuisines', 'public');
-            $cuisine->image = $imagePath;
+            $image = $request->file('image')->store('img', 'public');
+            $cuisine->image = $image;
+            $cuisine->save();
         }
 
         if ($request->hasFile('gallery')) {
-            $galleryPaths = [];
-            foreach ($request->file('gallery') as $galleryImage) {
-                $galleryPaths[] = ['image' => $galleryImage->store('cuisines/gallery', 'public')];
+            $galleryImages = [];
+            foreach ($request->file('gallery') as $file) {
+                $path = $file->store('img', 'public');
+                $galleryImages[] = ['image' => $path];
             }
-            $cuisine->gallery = $galleryPaths;
+            $cuisine->gallery = $galleryImages;
+            $cuisine->save();
         }
 
-        if ($request->action_buttons) {
-            $cuisine->action_buttons = json_decode($request->action_buttons, true);
-        }
-
+        $cuisine->action_buttons = $request->input('action_buttons');
         $cuisine->save();
 
         return redirect()->route('admin.cuisines.index')->with('success', 'Cuisine updated successfully.');
+    }
+    public function show($id)
+    {
+        // Ambil data 'cuisine' dari database berdasarkan ID
+        $cuisine = Cuisine::find($id);
+
+        // Pastikan 'action_buttons' adalah array atau inisialisasi dengan array kosong jika null
+        $actionButtons = $cuisine->action_buttons ?? [];
+
+        // Kirim data ke view
+        return view('cuisine.show', compact('cuisine', 'actionButtons'));
+    }
+
+
+    public function destroy($id)
+    {
+        $cuisine = Cuisine::findOrFail($id);
+        $cuisine->delete();
+
+        return redirect()->route('admin.cuisines.index')->with('success', 'Cuisine deleted successfully.');
     }
 }

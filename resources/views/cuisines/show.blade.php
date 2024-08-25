@@ -14,18 +14,18 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <!-- Main Image -->
                 <div class="col-span-2 flex justify-center items-center">
-                    <img src="{{ Storage::url('img/' . $cuisine->image) }}" alt="{{ $cuisine->name }}"
+                    <img src="{{ Storage::url($cuisine->image) }}" alt="{{ $cuisine->name }}"
                         class="rounded-lg w-full h-96 object-cover">
                 </div>
 
                 <!-- Thumbnail Images -->
                 <div class="flex flex-col space-y-4">
                     @foreach (array_slice($cuisine->gallery, 0, 2) as $item)
-                        <img src="{{ Storage::url('img/' . $item['image']) }}" alt="Thumbnail"
+                        <img src="{{ Storage::url($item['image']) }}" alt="Thumbnail"
                             class="rounded-lg object-cover h-28 w-full">
                     @endforeach
                     <div class="relative" x-data="{ open: false }">
-                        <img src="{{ Storage::url('img/' . $cuisine->image) }}" alt="Thumbnail 3"
+                        <img src="{{ Storage::url($cuisine->image) }}" alt="Thumbnail 3"
                             class="rounded-lg object-cover h-32 w-full cursor-pointer" @click="open = true">
                         <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg cursor-pointer"
                             @click="open = true">
@@ -50,7 +50,7 @@
                                     <div class="swiper-wrapper">
                                         @foreach ($cuisine->gallery as $item)
                                             <div class="swiper-slide flex justify-center items-center">
-                                                <img src="{{ Storage::url('img/' . $item['image']) }}" alt="Slide"
+                                                <img src="{{ Storage::url($item['image']) }}" alt="Slide"
                                                     class="w-auto h-auto object-contain max-h-full max-w-full mx-auto">
                                             </div>
                                         @endforeach
@@ -92,7 +92,7 @@
                     </div>
                     <div class="flex items-center">
                         <i class="fas fa-ticket-alt text-yellow-500 mr-2"></i>
-                        <span>{{ 'Rp ' . number_format($cuisine->ticket_price, 0, ',', '.') }}/tiket</span>
+                        <span>Start Form:{{ ' Rp ' . number_format($cuisine->ticket_price, 0, ',', '.') }}</span>
                     </div>
                 </div>
 
