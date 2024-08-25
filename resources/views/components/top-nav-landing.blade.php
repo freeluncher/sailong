@@ -17,7 +17,7 @@
                 x-transition:leave-start="opacity-100 transform scale-100"
                 x-transition:leave-end="opacity-0 transform scale-95"
                 class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50" x-cloak>
-                <a href="{{ route('accommodations.index') }}"
+                <a href="{{ route('public-accommodations.index') }}"
                     class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Accommodations</a>
                 <a href="{{ route('cuisines.index') }}"
                     class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cuisines</a>
@@ -98,7 +98,7 @@
                 class="text-white hover:text-gray-300">Informasi</a>
         </div>
         <div x-show="informasiOpen" class="flex flex-col space-y-2">
-            <a href="{{ route('accommodations.index') }}"
+            <a href="{{ route('public-accommodations.index') }}"
                 class="text-white hover:text-gray-300 pl-4">Accommodations</a>
             <a href="{{ route('cuisines.index') }}" class="text-white hover:text-gray-300 pl-4">Cuisines</a>
             <a href="{{ route('destinations.index') }}" class="text-white hover:text-gray-300 pl-4">Destinations</a>

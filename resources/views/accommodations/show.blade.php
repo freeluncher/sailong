@@ -22,7 +22,7 @@
                 <div class="flex flex-col space-y-4">
                     @foreach (array_slice($accommodation->gallery, 0, 2) as $item)
                         @if (isset($item['image']))
-                            <img src="{{ Storage::url('img/' . $item['image']) }}" alt="Thumbnail"
+                            <img src="{{ Storage::url($item['image']) }}" alt="Thumbnail"
                                 class="rounded-lg object-cover h-28 w-full">
                         @else
                             <img src="{{ Storage::url('img/default-thumbnail.jpg') }}" alt="Default Thumbnail"
@@ -61,7 +61,7 @@
                                         @foreach ($accommodation->gallery as $item)
                                             @if (isset($item['image']))
                                                 <div class="swiper-slide flex justify-center items-center">
-                                                    <img src="{{ Storage::url('img/' . $item['image']) }}" alt="Slide"
+                                                    <img src="{{ Storage::url($item['image']) }}" alt="Slide"
                                                         class="w-auto h-auto object-contain max-h-full max-w-full mx-auto">
                                                 </div>
                                             @endif
