@@ -1,21 +1,21 @@
 @extends('layouts.guest')
 
 @section('content')
-    <div class="container mx-auto p-4">
+    <div class="container mx-auto p-4 max-w-5xl">
         <!-- Header Back Button -->
         <div class="mb-4">
-            <a href="{{ route('public.accommodations.index') }}" class="text-yellow-500 hover:text-yellow-600">
-                <i class="fas fa-arrow-left"></i>
+            <a href="{{ route('public.accommodations.index') }}" class="inline-flex items-center text-blue-700 hover:text-yellow-400 font-semibold">
+                <i class="fas fa-arrow-left mr-2"></i> Kembali ke Daftar
             </a>
         </div>
 
         <!-- Image and Details Section -->
-        <div class="bg-white rounded-lg shadow-lg p-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Main Image -->
-                <div class="col-span-2 flex justify-center items-center">
+                <div class="col-span-2 flex flex-col items-center justify-center">
                     <img src="{{ Storage::url('img/' . $accommodation->image) }}" alt="{{ $accommodation->name }}"
-                        class="rounded-lg w-full h-96 object-cover">
+                        class="rounded-xl w-full h-80 object-cover border-4 border-blue-100 shadow-md">
                 </div>
 
                 <!-- Thumbnail Images -->
@@ -23,36 +23,36 @@
                     @foreach (array_slice($accommodation->gallery, 0, 2) as $item)
                         @if (isset($item['image']))
                             <img src="{{ Storage::url($item['image']) }}" alt="Thumbnail"
-                                class="rounded-lg object-cover h-28 w-full">
+                                class="rounded-lg object-cover h-24 w-full border border-yellow-300">
                         @else
                             <img src="{{ Storage::url('img/default-thumbnail.jpg') }}" alt="Default Thumbnail"
-                                class="rounded-lg object-cover h-28 w-full">
+                                class="rounded-lg object-cover h-24 w-full border border-yellow-300">
                         @endif
                     @endforeach
                     <div class="relative" x-data="{ open: false }">
                         @if (isset($accommodation->image))
                             <img src="{{ Storage::url('img/' . $accommodation->image) }}" alt="Thumbnail 3"
-                                class="rounded-lg object-cover h-32 w-full cursor-pointer" @click="open = true">
+                                class="rounded-lg object-cover h-24 w-full cursor-pointer border border-yellow-300" @click="open = true">
                         @else
                             <img src="{{ Storage::url('img/default-thumbnail.jpg') }}" alt="Default Thumbnail 3"
-                                class="rounded-lg object-cover h-32 w-full cursor-pointer" @click="open = true">
+                                class="rounded-lg object-cover h-24 w-full cursor-pointer border border-yellow-300" @click="open = true">
                         @endif
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg cursor-pointer"
+                        <div class="absolute inset-0 bg-blue-900 bg-opacity-40 flex items-center justify-center rounded-lg cursor-pointer"
                             @click="open = true">
-                            <span class="text-white font-bold">Lihat semua foto</span>
+                            <span class="text-yellow-300 font-bold">Lihat semua foto</span>
                         </div>
 
                         <!-- Modal -->
-                        <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-40"
+                        <div class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-40 pt-24 md:pt-12"
                             x-show="open" x-transition:enter="transition ease-out duration-300"
                             x-transition:enter-start="opacity-0 transform scale-90"
                             x-transition:enter-end="opacity-100 transform scale-100"
                             x-transition:leave="transition ease-in duration-300"
                             x-transition:leave-start="opacity-100 transform scale-100"
                             x-transition:leave-end="opacity-0 transform scale-90">
-                            <div class="relative w-full h-full">
-                                <div class="absolute top-2 right-2 z-50">
-                                    <button @click="open = false" class="text-white text-3xl">
+                            <div class="relative w-full h-full max-w-3xl mx-auto flex items-center justify-center">
+                                <div class="absolute top-4 right-4 z-50">
+                                    <button @click="open = false" class="text-yellow-300 text-3xl hover:text-yellow-500 bg-blue-900 bg-opacity-80 rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-yellow-300">
                                         <i class="fas fa-times"></i>
                                     </button>
                                 </div>
@@ -60,9 +60,11 @@
                                     <div class="swiper-wrapper">
                                         @foreach ($accommodation->gallery as $item)
                                             @if (isset($item['image']))
-                                                <div class="swiper-slide flex justify-center items-center">
-                                                    <img src="{{ Storage::url($item['image']) }}" alt="Slide"
-                                                        class="w-auto h-auto object-contain max-h-full max-w-full mx-auto">
+                                                <div class="swiper-slide flex justify-center items-center h-[70vh]">
+                                                    <div class="flex w-full h-full items-center justify-center">
+                                                        <img src="{{ Storage::url($item['image']) }}" alt="Slide"
+                                                            class="object-contain max-h-full max-w-full mx-auto rounded-xl border-2 border-yellow-300 shadow-lg" style="display: block; margin-left: auto; margin-right: auto;">
+                                                    </div>
                                                 </div>
                                             @endif
                                         @endforeach
@@ -77,50 +79,44 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <!-- Title and Description -->
-            <div class="mt-6">
-                <h1 class="text-2xl font-bold">{{ $accommodation->name }}</h1>
-                <p class="mt-4 text-gray-700">
-                    {{ $accommodation->description }}
-                </p>
+            <div class="mt-8">
+                <h1 class="text-3xl font-bold text-blue-900 mb-2">{{ $accommodation->name }}</h1>
+                <p class="mt-2 text-lg text-blue-700">{{ $accommodation->description }}</p>
             </div>
 
             <!-- Info and Action Buttons -->
-            <div class="mt-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="mt-8 flex flex-col md:flex-row justify-between items-center gap-6">
                 <!-- Location, Hours, Price -->
                 <div class="flex flex-col space-y-2 text-center md:text-left">
                     <div class="flex items-center">
-                        <i class="fas fa-map-marker-alt text-yellow-500 mr-2"></i>
-                        <span>{{ $accommodation->location }}</span>
+                        <i class="fas fa-map-marker-alt text-yellow-400 mr-2"></i>
+                        <span class="text-blue-900 font-semibold">{{ $accommodation->location }}</span>
                     </div>
                     <div class="flex items-center">
-                        <i class="fas fa-clock text-yellow-500 mr-2"></i>
-                        <span>Buka
+                        <i class="fas fa-clock text-yellow-400 mr-2"></i>
+                        <span class="text-blue-900">Buka
                             {{ \Carbon\Carbon::createFromFormat('H:i:s', $accommodation->opening_hours)->format('H:i') }} -
-                            {{ \Carbon\Carbon::createFromFormat('H:i:s', $accommodation->closing_hours)->format('H:i') }}
-                            WIB</span>
+                            {{ \Carbon\Carbon::createFromFormat('H:i:s', $accommodation->closing_hours)->format('H:i') }} WIB</span>
                     </div>
                     <div class="flex items-center">
-                        <i class="fas fa-ticket-alt text-yellow-500 mr-2"></i>
-                        <span>{{ 'Rp ' . number_format($accommodation->ticket_price, 0, ',', '.') }}/tiket</span>
+                        <i class="fas fa-ticket-alt text-yellow-400 mr-2"></i>
+                        <span class="text-blue-900 font-bold text-lg">Rp{{ number_format($accommodation->price_per_night, 0, ',', '.') }} <span class="text-xs font-normal">/ malam</span></span>
                     </div>
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex space-x-2 mt-4 md:mt-0">
+                <div class="flex flex-wrap gap-2 mt-4 md:mt-0">
                     @if (!empty($accommodation->action_buttons))
-                        <div class="mt-6 flex space-x-2">
-                            @foreach ($accommodation->action_buttons as $button)
-                                <a href="{{ $button['url'] }}"
-                                    class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 flex items-center space-x-2">
-                                    <i class="{{ $button['icon'] }}"></i>
-                                    <span>{{ $button['label'] }}</span>
-                                </a>
-                            @endforeach
-                        </div>
+                        @foreach ($accommodation->action_buttons as $button)
+                            <a href="{{ $button['url'] }}"
+                                class="bg-yellow-400 text-blue-900 px-4 py-2 rounded-lg hover:bg-blue-700 hover:text-yellow-200 flex items-center space-x-2 font-semibold shadow transition">
+                                <i class="{{ $button['icon'] }}"></i>
+                                <span>{{ $button['label'] }}</span>
+                            </a>
+                        @endforeach
                     @endif
                 </div>
             </div>

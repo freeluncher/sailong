@@ -1,4 +1,4 @@
-<div class="bg-white shadow-md w-full py-4 px-6 flex justify-between items-center absolute top-0 z-50">
+<div class="bg-white shadow-md w-full py-4 px-6 flex justify-between items-center fixed top-0 z-50">
     <a href="/" class="flex items-center space-x-2">
         <img src="{{ Storage::url('img/logo-sailong-alt.png') }}" alt="Logo" class="h-10 w-auto object-cover">
         <span class="text-black font-bold text-2xl mt-2">Sailong</span>
@@ -23,3 +23,5 @@
         </div>
     </div>
 </div>
+<!-- Spacer to prevent nav overlap -->
+<div class="h-16 md:h-16"></div>

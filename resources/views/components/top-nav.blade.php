@@ -37,12 +37,12 @@
             class="text-gray-600 hover:text-gray-800" target="_blank">Jadi Mitra</a>
         <a href="https://wa.me/+6282136263772?text=Halo%20Min!%20Saya%20mau%20tanya." target="_blank"
             class="text-gray-600 hover:text-gray-800">Hubungi Kami</a>
-        <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
-            alt="{{ Auth::user()->name }}" />
+        <img class="h-8 w-8 rounded-full object-cover" src="{{ optional(Auth::user())->profile_photo_url ?? asset('img/default-profile.png') }}"
+            alt="{{ optional(Auth::user())->name ?? 'User' }}" />
         <div class="relative" x-data="{ open: false }">
             <button @click="open = !open"
                 class="flex items-center space-x-2 text-gray-600 hover:text-gray-800 focus:outline-none">
-                <span>{{ Auth::user()->name }}</span>
+                <span>{{ optional(Auth::user())->name ?? 'User' }}</span>
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -56,14 +56,13 @@
                 x-transition:leave-end="opacity-0 transform scale-95"
                 class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50" x-cloak>
                 <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Dashboard</a>
-                @if (Auth::user()->hasRole('admin'))
-                    <a href="{{ route('admin.profile') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Edit
-                        Profile</a>
-                @elseif (Auth::user()->hasRole('homestay'))
+                @if (optional(Auth::user())->hasRole('admin'))
+                    <a href="{{ route('admin.profile') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Edit Profile</a>
+                @elseif (optional(Auth::user())->hasRole('homestay'))
                     <a href="{{ route('homestay.profile') }}"
                         class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Edit Profile</a>
-                @else
-                    <a href="{{ route('user.profile', ['name' => Auth::user()->name]) }}"
+                @elseif (optional(Auth::user())->hasRole('user'))
+                    <a href="{{ route('user.profile', ['name' => optional(Auth::user())->name]) }}"
                         class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Edit Profile</a>
                 @endif
                 <form method="POST" action="{{ route('logout') }}">

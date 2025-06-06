@@ -1,26 +1,33 @@
 @extends('layouts.guest')
 
 @section('content')
-    <div class="mt-10">
+    <div class="mt-10 bg-blue-50 min-h-screen">
         <div class="container mx-auto px-4 py-8">
-            <h1 class="text-2xl font-bold mb-6">Destinations</h1>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach ($destinations as $destination)
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                        <div class="h-48 w-full overflow-hidden">
-                            <img class="object-cover w-full h-full" src="{{ Storage::url('img/' . $destination->image) }}""
-                                alt="{{ $destination->name }}">
+            <h1 class="text-3xl font-bold mb-8 text-blue-900 text-center">Destinasi Wisata</h1>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                @forelse ($destinations as $destination)
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col h-full border-2 border-blue-100 hover:border-yellow-400 transition">
+                        <div class="w-full h-48 overflow-hidden relative">
+                            <img class="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
+                                src="{{ Storage::url('img/' . $destination->image) }}" alt="{{ $destination->name }}">
+                            <span
+                                class="absolute top-2 left-2 bg-yellow-400 text-blue-900 text-xs font-bold px-3 py-1 rounded-full shadow">
+                                {{ $destination->location }}</span>
                         </div>
-                        <div class="p-6">
-                            <h2 class="text-xl font-bold mb-2 truncate">{{ $destination->name }}</h2>
-                            <p class="text-gray-700 mb-2 truncate">{{ $destination->location }}</p>
-                            <p class="text-gray-600 line-clamp-2">{{ $destination->description }}</p>
-                            <p class="text-gray-900 font-bold mt-4">Ticket Price: Rp{{ $destination->ticket_price }}</p>
-                            <a href="{{ route('destinations.show', $destination) }}"
-                                class="text-blue-500 mt-4 inline-block">View Details</a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <h2 class="text-xl font-bold mb-2 text-blue-900 truncate">{{ $destination->name }}</h2>
+                            <p class="text-blue-700 mb-2 line-clamp-2">{{ $destination->description }}</p>
+                            <div class="mt-auto flex flex-col gap-2">
+                                <span class="text-yellow-500 font-bold text-lg">Rp{{ number_format($destination->ticket_price, 0, ',', '.') }}</span>
+                                <a href="{{ route('destinations.show', $destination) }}"
+                                    class="bg-blue-900 text-yellow-300 px-4 py-2 rounded-lg hover:bg-yellow-400 hover:text-blue-900 font-semibold text-center transition">Lihat
+                                    Detail</a>
+                            </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="col-span-full text-center text-blue-900 font-semibold">Belum ada destinasi tersedia.</div>
+                @endforelse
             </div>
         </div>
     </div>

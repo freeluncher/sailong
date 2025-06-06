@@ -12,7 +12,11 @@ class DestinationController extends Controller
     public function index()
     {
         $destinations = Destination::all();
-        return view('admin.destinations.index', compact('destinations'));
+        // Jika user admin, arahkan ke view admin, jika tidak ke public
+        if (auth()->check() && auth()->user()->hasRole('admin')) {
+            return view('admin.destinations.index', compact('destinations'));
+        }
+        return view('destinations.index', compact('destinations'));
     }
 
     public function show($id)
