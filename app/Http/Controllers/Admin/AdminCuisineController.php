@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cuisine;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\StoreCuisineRequest;
+use App\Http\Requests\UpdateCuisineRequest;
 
 class AdminCuisineController extends Controller
 {
@@ -20,19 +22,8 @@ class AdminCuisineController extends Controller
         return view('admin.cuisines.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreCuisineRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
-            'description' => 'required|string',
-            'image' => 'required|image',
-            'gallery.*' => 'image',
-            'opening_hours' => 'required',
-            'closing_hours' => 'required',
-            'ticket_price' => 'required|numeric',
-        ]);
-
         $image = $request->file('image')->store('img', 'public');
 
         $galleryImages = [];
@@ -69,21 +60,32 @@ class AdminCuisineController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(UpdateCuisineRequest $request, $id)
     {
-        // Logging request data
         Log::info('Update request data:', $request->all());
 
         $cuisine = Cuisine::findOrFail($id);
-        $cuisine->update($request->all());
+        $cuisine->update($request->except('image', 'gallery'));
 
         if ($request->hasFile('image')) {
+            // Hapus file lama jika ada dan diganti
+            if ($cuisine->image && \Storage::disk('public')->exists($cuisine->image)) {
+                \Storage::disk('public')->delete($cuisine->image);
+            }
             $image = $request->file('image')->store('img', 'public');
             $cuisine->image = $image;
             $cuisine->save();
         }
 
         if ($request->hasFile('gallery')) {
+            // Hapus file gallery lama jika diganti
+            if (is_array($cuisine->gallery)) {
+                foreach ($cuisine->gallery as $galleryItem) {
+                    if (isset($galleryItem['image']) && \Storage::disk('public')->exists($galleryItem['image'])) {
+                        \Storage::disk('public')->delete($galleryItem['image']);
+                    }
+                }
+            }
             $galleryImages = [];
             foreach ($request->file('gallery') as $file) {
                 $path = $file->store('img', 'public');

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UpdateUserRequest;
+
 
 class CrudUserController extends Controller
 {
@@ -48,19 +50,12 @@ class CrudUserController extends Controller
         return view('admin.users.edit', compact('user', 'roles'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8|confirmed',
-            'roles' => 'required|array',
-        ]);
-
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password ? Hash::make($request->password) : $user->password,
+            'password' => $request->password ? \Hash::make($request->password) : $user->password,
         ]);
 
         $user->syncRoles($request->roles);

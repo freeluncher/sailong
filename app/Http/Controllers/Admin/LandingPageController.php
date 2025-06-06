@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\LandingPage;
+use App\Http\Requests\UpdateLandingPageRequest;
 
 class LandingPageController extends Controller
 {
@@ -61,20 +62,9 @@ class LandingPageController extends Controller
         return view('admin.landing-pages.edit', compact('landingPage'));
     }
 
-    public function update(Request $request, LandingPage $landingPage)
+    public function update(UpdateLandingPageRequest $request, LandingPage $landingPage)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required',
-            'hero_image_path' => 'nullable|string|max:255',
-            'cards' => 'nullable|array',
-            'cards.*.title' => 'required_with:cards|string|max:255',
-            'cards.*.description' => 'required_with:cards|string',
-            'cards.*.image_path' => 'required_with:cards|string|max:255',
-            'cards.*.url' => 'required_with:cards|string|max:255',
-        ]);
-
-        $landingPage->update($request->all());
+        $landingPage->update($request->validated());
 
         return redirect()->route('landing-pages.index')
                          ->with('success', 'Landing page updated successfully.');

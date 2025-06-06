@@ -5,6 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $description
+ * @property string $location
+ * @property string|null $image
+ * @property array|null $gallery
+ * @property string|null $opening_hours
+ * @property string|null $closing_hours
+ * @property array|null $action_buttons
+ */
 class Cuisine extends Model
 {
     use HasFactory;

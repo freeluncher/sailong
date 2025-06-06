@@ -5,6 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property string $content
+ * @property string|null $hero_image_path
+ * @property array|null $cards
+ * @property bool $is_active
+ */
 class LandingPage extends Model
 {
     use HasFactory;

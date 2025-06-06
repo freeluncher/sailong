@@ -17,30 +17,30 @@
                     <div class="mb-4">
                         <label for="name" class="block text-gray-700">Name</label>
                         <input type="text" name="name" id="name" class="w-full border-gray-300 rounded-lg p-2"
-                            value="{{ $cuisine->name }}" required>
+                            value="{{ old('name', $cuisine->name) }}" required>
                     </div>
 
                     <div class="mb-4">
                         <label for="description" class="block text-gray-700">Description</label>
-                        <textarea name="description" id="description" class="w-full border-gray-300 rounded-lg p-2" required>{{ $cuisine->description }}</textarea>
+                        <textarea name="description" id="description" class="w-full border-gray-300 rounded-lg p-2" required>{{ old('description', $cuisine->description) }}</textarea>
                     </div>
 
                     <div class="mb-4">
                         <label for="location" class="block text-gray-700">Location</label>
                         <input type="text" name="location" id="location" class="w-full border-gray-300 rounded-lg p-2"
-                            value="{{ $cuisine->location }}" required>
+                            value="{{ old('location', $cuisine->location) }}" required>
                     </div>
 
                     <div class="mb-4">
                         <label for="opening_hours" class="block text-gray-700">Opening Hours</label>
                         <input type="time" name="opening_hours" id="opening_hours"
-                            class="w-full border-gray-300 rounded-lg p-2" value="{{ $cuisine->opening_hours }}" required>
+                            class="w-full border-gray-300 rounded-lg p-2" value="{{ old('opening_hours', $cuisine->opening_hours) }}" required>
                     </div>
 
                     <div class="mb-4">
                         <label for="closing_hours" class="block text-gray-700">Closing Hours</label>
                         <input type="time" name="closing_hours" id="closing_hours"
-                            class="w-full border-gray-300 rounded-lg p-2" value="{{ $cuisine->closing_hours }}" required>
+                            class="w-full border-gray-300 rounded-lg p-2" value="{{ old('closing_hours', $cuisine->closing_hours) }}" required>
                     </div>
 
                     <div class="mb-4">
@@ -71,13 +71,13 @@
                                 <div class="flex space-x-4 mb-2">
                                     <input type="text" name="action_buttons[{{ $index }}][label]"
                                         placeholder="Button Label" class="w-full border-gray-300 rounded-lg p-2"
-                                        value="{{ $button['label'] }}">
+                                        value="{{ old('action_buttons.' . $index . '.label', $button['label']) }}">
                                     <input type="text" name="action_buttons[{{ $index }}][icon]"
                                         placeholder="Button Icon" class="w-full border-gray-300 rounded-lg p-2"
-                                        value="{{ $button['icon'] }}">
+                                        value="{{ old('action_buttons.' . $index . '.icon', $button['icon']) }}">
                                     <input type="text" name="action_buttons[{{ $index }}][url]"
                                         placeholder="Button URL" class="w-full border-gray-300 rounded-lg p-2"
-                                        value="{{ $button['url'] }}">
+                                        value="{{ old('action_buttons.' . $index . '.url', $button['url']) }}">
                                     <button type="button" class="text-red-500 hover:text-red-700"
                                         onclick="this.parentElement.remove()">Remove</button>
                                 </div>

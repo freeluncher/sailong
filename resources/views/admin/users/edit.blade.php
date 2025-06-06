@@ -9,12 +9,12 @@
             <div class="mb-4">
                 <label for="name" class="block text-gray-700">Name</label>
                 <input type="text" name="name" id="name" class="w-full border border-gray-300 rounded px-4 py-2"
-                    value="{{ $user->name }}" required>
+                    value="{{ old('name', $user->name) }}" required>
             </div>
             <div class="mb-4">
                 <label for="email" class="block text-gray-700">Email</label>
                 <input type="email" name="email" id="email" class="w-full border border-gray-300 rounded px-4 py-2"
-                    value="{{ $user->email }}" required>
+                    value="{{ old('email', $user->email) }}" required>
             </div>
             <div class="mb-4">
                 <label for="password" class="block text-gray-700">Password</label>
@@ -32,7 +32,7 @@
                     @foreach ($roles as $role)
                         <label class="inline-flex items-center mr-4">
                             <input type="radio" name="roles[]" value="{{ $role->name }}"
-                                {{ $user->roles->contains('name', $role->name) ? 'checked' : '' }}
+                                {{ in_array($role->name, old('roles', $user->roles->pluck('name')->toArray())) ? 'checked' : '' }}
                                 class="form-radio h-5 w-5 text-blue-600">
                             <span class="ml-2 text-gray-700">{{ $role->name }}</span>
                         </label>

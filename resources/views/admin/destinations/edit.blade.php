@@ -17,45 +17,45 @@
                     <div class="mb-4">
                         <label for="name" class="block text-gray-700">Name</label>
                         <input type="text" name="name" id="name" class="w-full border-gray-300 rounded-lg p-2"
-                            value="{{ $destination->name }}" required>
+                            value="{{ old('name', $destination->name) }}" required>
                     </div>
 
                     <div class="mb-4">
                         <label for="description" class="block text-gray-700">Description</label>
-                        <textarea name="description" id="description" class="w-full border-gray-300 rounded-lg p-2" required>{{ $destination->description }}</textarea>
+                        <textarea name="description" id="description" class="w-full border-gray-300 rounded-lg p-2" required>{{ old('description', $destination->description) }}</textarea>
                     </div>
 
                     <div class="mb-4">
                         <label for="location" class="block text-gray-700">Location</label>
                         <input type="text" name="location" id="location" class="w-full border-gray-300 rounded-lg p-2"
-                            value="{{ $destination->location }}" required>
+                            value="{{ old('location', $destination->location) }}" required>
                     </div>
 
                     <div class="mb-4">
                         <label for="opening_hours" class="block text-gray-700">Opening Hours</label>
                         <input type="time" name="opening_hours" id="opening_hours"
-                            class="w-full border-gray-300 rounded-lg p-2" value="{{ $destination->opening_hours }}"
+                            class="w-full border-gray-300 rounded-lg p-2" value="{{ old('opening_hours', $destination->opening_hours) }}"
                             required>
                     </div>
 
                     <div class="mb-4">
                         <label for="closing_hours" class="block text-gray-700">Closing Hours</label>
                         <input type="time" name="closing_hours" id="closing_hours"
-                            class="w-full border-gray-300 rounded-lg p-2" value="{{ $destination->closing_hours }}"
+                            class="w-full border-gray-300 rounded-lg p-2" value="{{ old('closing_hours', $destination->closing_hours) }}"
                             required>
                     </div>
 
                     <div class="mb-4">
                         <label for="ticket_price" class="block text-gray-700">Ticket Price</label>
                         <input type="number" name="ticket_price" id="ticket_price"
-                            class="w-full border-gray-300 rounded-lg p-2" value="{{ $destination->ticket_price }}" required>
+                            class="w-full border-gray-300 rounded-lg p-2" value="{{ old('ticket_price', $destination->ticket_price) }}" required>
                     </div>
 
                     <div class="mb-4">
                         <label for="image" class="block text-gray-700">Main Image</label>
                         <input type="file" name="image" id="image" class="w-full border-gray-300 rounded-lg p-2">
                         @if ($destination->image)
-                            <img src="{{ Storage::url('img/' . $destination->image) }}" alt="{{ $destination->name }}"
+                            <img src="{{ Storage::url($destination->image) }}" alt="{{ $destination->name }}"
                                 class="mt-4 h-32 rounded-lg">
                         @endif
                     </div>
@@ -79,13 +79,13 @@
                                 <div class="flex space-x-4 mb-2">
                                     <input type="text" name="action_buttons[{{ $index }}][label]"
                                         placeholder="Button Label" class="w-full border-gray-300 rounded-lg p-2"
-                                        value="{{ $button['label'] }}">
+                                        value="{{ old('action_buttons.' . $index . '.label', $button['label']) }}">
                                     <input type="text" name="action_buttons[{{ $index }}][icon]"
                                         placeholder="Button Icon" class="w-full border-gray-300 rounded-lg p-2"
-                                        value="{{ $button['icon'] }}">
+                                        value="{{ old('action_buttons.' . $index . '.icon', $button['icon']) }}">
                                     <input type="text" name="action_buttons[{{ $index }}][url]"
                                         placeholder="Button URL" class="w-full border-gray-300 rounded-lg p-2"
-                                        value="{{ $button['url'] }}">
+                                        value="{{ old('action_buttons.' . $index . '.url', $button['url']) }}">
                                     <button type="button" class="text-red-500 hover:text-red-700"
                                         onclick="this.parentElement.remove()">Remove</button>
                                 </div>

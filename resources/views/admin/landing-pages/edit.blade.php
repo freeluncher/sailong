@@ -15,21 +15,21 @@
                     <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
                     <input type="text" name="title" id="title"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                        value="{{ $landingPage->title }}" required>
+                        value="{{ old('title', $landingPage->title) }}" required>
                 </div>
 
                 <div>
                     <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
                     <textarea name="content" id="content"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                        rows="5" required>{{ $landingPage->content }}</textarea>
+                        rows="5" required>{{ old('content', $landingPage->content) }}</textarea>
                 </div>
 
                 <div>
                     <label for="hero_image_path" class="block text-sm font-medium text-gray-700">Hero Image Path</label>
                     <input type="text" name="hero_image_path" id="hero_image_path"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                        value="{{ $landingPage->hero_image_path }}">
+                        value="{{ old('hero_image_path', $landingPage->hero_image_path) }}">
                 </div>
 
                 <div>
@@ -43,7 +43,7 @@
                                             class="block text-sm font-medium text-gray-700">Card Title</label>
                                         <input type="text" name="cards[{{ $index }}][title]"
                                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                            value="{{ $card['title'] }}">
+                                            value="{{ old('cards.' . $index . '.title', $card['title']) }}">
                                     </div>
 
                                     <div>
@@ -51,7 +51,7 @@
                                             class="block text-sm font-medium text-gray-700">Card Description</label>
                                         <textarea name="cards[{{ $index }}][description]"
                                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                            rows="3">{{ $card['description'] }}</textarea>
+                                            rows="3">{{ old('cards.' . $index . '.description', $card['description']) }}</textarea>
                                     </div>
 
                                     <div>
@@ -59,7 +59,7 @@
                                             class="block text-sm font-medium text-gray-700">Card Image Path</label>
                                         <input type="text" name="cards[{{ $index }}][image_path]"
                                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                            value="{{ $card['image_path'] }}">
+                                            value="{{ old('cards.' . $index . '.image_path', $card['image_path']) }}">
                                     </div>
 
                                     <div>
@@ -67,7 +67,7 @@
                                             class="block text-sm font-medium text-gray-700">Card URL</label>
                                         <input type="text" name="cards[{{ $index }}][url]"
                                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                            value="{{ $card['url'] }}">
+                                            value="{{ old('cards.' . $index . '.url', $card['url']) }}">
                                     </div>
                                 </div>
                             </div>

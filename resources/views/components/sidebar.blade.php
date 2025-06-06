@@ -23,7 +23,7 @@
                             class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 w-full">
                             <div class="flex items-center w-full">
                                 <i
-                                    :class="open ? '{{ $item['icon'] }} w-8' : '{{ $item['icon'] }} text-2xl w-full text-center'"></i>
+                                    :class="open ? $item['icon'] . ' w-8' : $item['icon'] . ' text-2xl w-full text-center'"></i>
                                 <span :class="open ? 'ml-2' : 'hidden'"
                                     class="transition-all duration-300">{{ $item['name'] }}</span>
                             </div>
@@ -36,9 +36,7 @@
                             @foreach ($item['submenu'] as $submenu)
                                 <a href="{{ $submenu['url'] }}"
                                     class="flex items-center py-2 px-4 rounded transition duration-200 hover:bg-gray-700 w-full">
-                                    <i
-                                        :class="open ? '{{ $submenu['icon'] }} w-8' :
-                                            '{{ $submenu['icon'] }} text-2xl w-full text-center'"></i>
+                                    <i :class="open ? $submenu['icon'] . ' w-8' : $submenu['icon'] . ' text-2xl w-full text-center'"></i>
                                     <span :class="open ? 'ml-2' : 'hidden'"
                                         class="transition-all duration-300">{{ $submenu['name'] }}</span>
                                 </a>
@@ -48,8 +46,7 @@
                 @else
                     <a href="{{ $item['url'] }}"
                         class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 w-full">
-                        <i
-                            :class="open ? '{{ $item['icon'] }} w-8' : '{{ $item['icon'] }} text-2xl w-full text-center'"></i>
+                        <i :class="open ? $item['icon'] . ' w-8' : $item['icon'] . ' text-2xl w-full text-center'"></i>
                         <span :class="open ? 'ml-2' : 'hidden'"
                             class="transition-all duration-300">{{ $item['name'] }}</span>
                     </a>

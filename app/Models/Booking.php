@@ -5,6 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property int $user_id
+ * @property int|null $destination_id
+ * @property int|null $tour_id
+ * @property string $booking_date
+ * @property float $total_price
+ */
 class Booking extends Model
 {
     use HasFactory;

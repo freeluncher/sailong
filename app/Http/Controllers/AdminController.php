@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use App\Http\Requests\UpdateAdminProfileRequest;
 
 class AdminController extends Controller
 {
@@ -26,32 +26,29 @@ class AdminController extends Controller
         return view('admin.profile');
     }
 
-    public function updateProfile(Request $request)
+    public function updateProfile(UpdateAdminProfileRequest $request)
     {
-    $admin = Auth::user();
+        $admin = Auth::user();
 
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users,email,' . $admin->id,
-        'password' => 'nullable|string|min:8|confirmed',
-        'profile_photo_url' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-    ]);
+        $admin->name = $request->name;
+        $admin->email = $request->email;
 
-    $admin->name = $request->name;
-    $admin->email = $request->email;
+        if ($request->password) {
+            $admin->password = \Hash::make($request->password);
+        }
 
-    if ($request->password) {
-        $admin->password = Hash::make($request->password);
-    }
+        if ($request->hasFile('profile_photo_url')) {
+            // Hapus file lama jika ada dan diganti
+            if ($admin->profile_photo_url && \Storage::disk('public')->exists(str_replace('/storage/', '', $admin->profile_photo_url))) {
+                \Storage::disk('public')->delete(str_replace('/storage/', '', $admin->profile_photo_url));
+            }
+            $path = $request->file('profile_photo_url')->store('profile_photos', 'public');
+            $admin->profile_photo_url = '/storage/' . $path;
+        }
 
-    if ($request->hasFile('profile_photo_url')) {
-        $path = $request->file('profile_photo_url')->store('profile_photos', 'public');
-        $admin->profile_photo_url = '/storage/' . $path;
-    }
+        $admin->save();
 
-    $admin->save();
-
-    return redirect()->route('admin.profile')->with('success', 'Profile updated successfully');
+        return redirect()->route('admin.profile')->with('success', 'Profile updated successfully');
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Destination;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\UpdateDestinationRequest;
 
 class DestinationController extends Controller
 {
@@ -76,30 +77,29 @@ class DestinationController extends Controller
         return view('admin.destinations.edit', compact('destination'));
     }
 
-    public function update(Request $request, Destination $destination)
+    public function update(UpdateDestinationRequest $request, Destination $destination)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'location' => 'required|string',
-            'image' => 'nullable|image',
-            'ticket_price' => 'required|numeric',
-            'gallery' => 'nullable|array',
-            'gallery.*' => 'image',
-            'opening_hours' => 'required',
-            'closing_hours' => 'required',
-            'action_buttons' => 'nullable|array',
-        ]);
-
         $destination->fill($request->except('image', 'gallery'));
 
         // Handle main image upload
         if ($request->hasFile('image')) {
+            // Hapus file lama jika ada dan diganti
+            if ($destination->image && \Storage::disk('public')->exists($destination->image)) {
+                \Storage::disk('public')->delete($destination->image);
+            }
             $imagePath = $request->file('image')->store('img', 'public');
             $destination->image = $imagePath;
         }
 
         if ($request->hasFile('gallery')) {
+            // Hapus file gallery lama jika diganti
+            if (is_array($destination->gallery)) {
+                foreach ($destination->gallery as $galleryItem) {
+                    if (isset($galleryItem['image']) && \Storage::disk('public')->exists($galleryItem['image'])) {
+                        \Storage::disk('public')->delete($galleryItem['image']);
+                    }
+                }
+            }
             $galleryPaths = [];
             foreach ($request->file('gallery') as $galleryImage) {
                 $galleryPaths[] = ['image' => $galleryImage->store('img', 'public')];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateHomestayProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -26,16 +27,9 @@ class HomestayController extends Controller
         return view('homestay.profile');
     }
 
-    public function updateProfile(Request $request)
+    public function updateProfile(UpdateHomestayProfileRequest $request)
     {
         $homestay = Auth::user();
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $homestay->id,
-            'password' => 'nullable|string|min:8|confirmed',
-            'profile_photo_url' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
 
         $homestay->name = $request->name;
         $homestay->email = $request->email;
@@ -45,6 +39,10 @@ class HomestayController extends Controller
         }
 
         if ($request->hasFile('profile_photo_url')) {
+            // Hapus file lama jika ada dan diganti
+            if ($homestay->profile_photo_url && \Storage::disk('public')->exists(str_replace('/storage/', '', $homestay->profile_photo_url))) {
+                \Storage::disk('public')->delete(str_replace('/storage/', '', $homestay->profile_photo_url));
+            }
             $path = $request->file('profile_photo_url')->store('profile_photos', 'public');
             $homestay->profile_photo_url = '/storage/' . $path;
         }

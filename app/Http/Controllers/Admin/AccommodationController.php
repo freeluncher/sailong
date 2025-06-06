@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Accommodation;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\StoreAccommodationRequest;
+use App\Http\Requests\UpdateAccommodationRequest;
 
 class AccommodationController extends Controller
 {
@@ -22,24 +24,12 @@ class AccommodationController extends Controller
         return view('admin.accommodations.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreAccommodationRequest $request)
     {
         Log::info('AccommodationController@store called', ['request_data' => $request->all()]);
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'location' => 'required|string',
-            'image' => 'nullable|image',
-            'price_per_night' => 'required|numeric',
-            'gallery' => 'nullable|array',
-            'gallery.*' => 'image',
-            'opening_hours' => 'nullable',
-            'closing_hours' => 'nullable',
-            'action_buttons' => 'nullable|array',
-        ]);
-
-        $accommodation = new Accommodation($request->except('image', 'gallery'));
+        $accommodation = new Accommodation();
+        $accommodation->fill($request->except('image', 'gallery'));
 
         // Handle main image upload
         if ($request->hasFile('image')) {
@@ -58,7 +48,6 @@ class AccommodationController extends Controller
         $accommodation->save();
 
         Log::info('Accommodation created successfully', ['accommodation_id' => $accommodation->id]);
-
         return redirect()->route('accommodations.index')->with('success', 'Accommodation created successfully.');
     }
 
@@ -80,35 +69,34 @@ class AccommodationController extends Controller
         return view('admin.accommodations.edit', compact('accommodation'));
     }
 
-    public function update(Request $request, Accommodation $accommodation)
+    public function update(UpdateAccommodationRequest $request, Accommodation $accommodation)
     {
         Log::info('AccommodationController@update called', [
             'accommodation_id' => $accommodation->id,
             'request_data' => $request->all()
         ]);
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'location' => 'required|string',
-            'price_per_night' => 'required|numeric',
-            'gallery' => 'nullable|array',
-            'gallery.*' => 'image', // Validate each gallery image
-            'image' => 'nullable|image',
-            'opening_hours' => 'nullable',
-            'closing_hours' => 'nullable',
-            'action_buttons' => 'nullable|array',
-        ]);
-
         $accommodation->fill($request->except('image', 'gallery'));
 
         // Handle main image upload
         if ($request->hasFile('image')) {
+            // Hapus file lama jika ada dan diganti
+            if ($accommodation->image && \Storage::disk('public')->exists($accommodation->image)) {
+                \Storage::disk('public')->delete($accommodation->image);
+            }
             $imagePath = $request->file('image')->store('img', 'public');
             $accommodation->image = $imagePath;
         }
 
         if ($request->hasFile('gallery')) {
+            // Hapus file gallery lama jika diganti
+            if (is_array($accommodation->gallery)) {
+                foreach ($accommodation->gallery as $galleryItem) {
+                    if (isset($galleryItem['image']) && \Storage::disk('public')->exists($galleryItem['image'])) {
+                        \Storage::disk('public')->delete($galleryItem['image']);
+                    }
+                }
+            }
             $galleryPaths = [];
             foreach ($request->file('gallery') as $galleryImage) {
                 $galleryPaths[] = ['image' => $galleryImage->store('img', 'public')];
@@ -117,7 +105,6 @@ class AccommodationController extends Controller
         }
         Log::info('Gallery data:', ['gallery' => $accommodation->gallery]);
         $accommodation->save();
-
 
         Log::info('Accommodation updated successfully', ['accommodation_id' => $accommodation->id]);
 
