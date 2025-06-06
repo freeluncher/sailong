@@ -24,9 +24,9 @@
                         'url' => '#',
                         'icon' => 'fa-solid fa-user',
                         'submenu' => [
-                            ['name' => 'All Users', 'url' => route('users.index'), 'icon' => 'fa-solid fa-users'],
-                            ['name' => 'Roles', 'url' => route('roles.index'), 'icon' => 'fa-solid fa-masks-theater'],
-                            ['name' => 'Permissions', 'url' => route('permissions.index'), 'icon' => 'fa-solid fa-key'],
+                            ['name' => 'All Users', 'url' => route('admin.users.index'), 'icon' => 'fa-solid fa-users'],
+                            ['name' => 'Roles', 'url' => route('admin.roles.index'), 'icon' => 'fa-solid fa-masks-theater'],
+                            ['name' => 'Permissions', 'url' => route('admin.permissions.index'), 'icon' => 'fa-solid fa-key'],
                         ],
                     ],
                     ['name' => 'Settings', 'url' => route('admin.settings'), 'icon' => 'fa-solid fa-gear'],
@@ -37,17 +37,17 @@
                         'submenu' => [
                             [
                                 'name' => 'Landing Pages',
-                                'url' => route('landing-pages.index'),
+                                'url' => route('admin.landing-pages.index'),
                                 'icon' => 'fa-solid fa-scroll',
                             ],
                             [
                                 'name' => 'Destinations',
-                                'url' => route('admin.destinations.manage'),
+                                'url' => route('admin.destinations.index'),
                                 'icon' => 'fa-solid fa-location-dot',
                             ],
                             [
                                 'name' => 'Accommodations',
-                                'url' => route('accommodations.index'),
+                                'url' => route('public.accommodations.index'),
                                 'icon' => 'fa-solid fa-hotel',
                             ],
                             [

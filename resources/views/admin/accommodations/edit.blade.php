@@ -5,7 +5,7 @@
         <div class="container mx-auto p-4">
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-3xl font-bold">Edit Accommodation</h1>
-                <a href="{{ route('accommodations.index') }}" class="text-blue-500 hover:underline">Back to List</a>
+                <a href="{{ route('admin.accommodations.index') }}" class="text-blue-500 hover:underline">Back to List</a>
             </div>
 
             <form action="{{ route('accommodations.update', $accommodation->id) }}" method="POST"

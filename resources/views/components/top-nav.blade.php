@@ -23,7 +23,7 @@
                 x-transition:leave-start="opacity-100 transform scale-100"
                 x-transition:leave-end="opacity-0 transform scale-95"
                 class="absolute mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50" x-cloak>
-                <a href="{{ route('public-accommodations.index') }}"
+                <a href="{{ route('public.accommodations.index') }}"
                     class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Accommodations</a>
                 <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Tours
                     (coming soon)</a>

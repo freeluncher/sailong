@@ -60,6 +60,6 @@
             ],
         ],
         ['name' => 'Settings', 'url' => route('admin.settings'), 'icon' => 'fa-solid fa-gear'],
-        ['name' => 'Landing Pages', 'url' => route('landing-pages.index'), 'icon' => 'fa-solid fa-pager'],
+        ['name' => 'Landing Pages', 'url' => route('admin.landing-pages.index'), 'icon' => 'fa-solid fa-pager'],
     ];
 @endphp

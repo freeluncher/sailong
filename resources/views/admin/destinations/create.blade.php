@@ -5,7 +5,7 @@
         <div class="container mx-auto p-4">
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-3xl font-bold">Add Destination</h1>
-                <a href="{{ route('admin.destinations.manage') }}" class="text-blue-500 hover:underline">Back to List</a>
+                <a href="{{ route('admin.destinations.index') }}" class="text-blue-500 hover:underline">Back to List</a>
             </div>
 
             <form action="{{ route('admin.destinations.store') }}" method="POST" enctype="multipart/form-data"
@@ -159,7 +159,7 @@
             ],
         ],
         ['name' => 'Settings', 'url' => route('admin.settings'), 'icon' => 'fa-solid fa-gear'],
-        ['name' => 'Landing Pages', 'url' => route('landing-pages.index'), 'icon' => 'fa-solid fa-pager'],
+        ['name' => 'Landing Pages', 'url' => route('admin.landing-pages.index'), 'icon' => 'fa-solid fa-pager'],
     ];
 @endphp
 
@@ -177,6 +177,6 @@
             ],
         ],
         ['name' => 'Settings', 'url' => route('admin.settings'), 'icon' => 'fa-solid fa-gear'],
-        ['name' => 'Landing Pages', 'url' => route('landing-pages.index'), 'icon' => 'fa-solid fa-pager'],
+        ['name' => 'Landing Pages', 'url' => route('admin.landing-pages.index'), 'icon' => 'fa-solid fa-pager'],
     ];
 @endphp

@@ -28,6 +28,6 @@ class RolePermissionController extends Controller
             }
         }
 
-        return redirect()->route('roles.index')->with('success', 'Permissions updated successfully');
+        return redirect()->route('admin.roles.index')->with('success', 'Permissions updated successfully');
     }
 }

@@ -5,7 +5,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- Form Section -->
-        <form action="{{ route('landing-pages.update', $landingPage) }}" method="POST" id="landing-page-form"
+        <form action="{{ route('admin.landing-pages.update', $landingPage) }}" method="POST" id="landing-page-form"
             class="space-y-6">
             @csrf
             @method('PUT')
@@ -154,3 +154,7 @@
             });
         </script>
     @endsection
+
+    <div class="mt-4">
+        <a href="{{ route('admin.landing-pages.index') }}" class="text-blue-500 hover:underline">Back to List</a>
+    </div>

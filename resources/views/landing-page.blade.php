@@ -73,7 +73,7 @@
                     @if (is_array($landingPage->cards))
                         @foreach ($landingPage->cards as $card)
                             <div class="swiper-slide w-full md:w-1/3 px-2 mb-6">
-                                <a href="{{ route($card['url']) }}">
+                                <a href="{{ route(str_replace('-', '.', $card['url'])) }}">
                                     <div class="bg-primary-500 rounded-lg overflow-hidden shadow-md h-full">
                                         <div class="flex justify-center items-center px-6 pt-4">
                                             <img class="w-2/3 h-2/3 object-cover"

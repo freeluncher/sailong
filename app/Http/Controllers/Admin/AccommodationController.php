@@ -48,7 +48,7 @@ class AccommodationController extends Controller
         $accommodation->save();
 
         Log::info('Accommodation created successfully', ['accommodation_id' => $accommodation->id]);
-        return redirect()->route('accommodations.index')->with('success', 'Accommodation created successfully.');
+        return redirect()->route('admin.accommodations.index')->with('success', 'Accommodation created successfully.');
     }
 
     public function show($id)
@@ -108,7 +108,7 @@ class AccommodationController extends Controller
 
         Log::info('Accommodation updated successfully', ['accommodation_id' => $accommodation->id]);
 
-        return redirect()->route('accommodations.index')->with('success', 'Accommodation updated successfully.');
+        return redirect()->route('admin.accommodations.index')->with('success', 'Accommodation updated successfully.');
     }
 
     public function destroy(Accommodation $accommodation)

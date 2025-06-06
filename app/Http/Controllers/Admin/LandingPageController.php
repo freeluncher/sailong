@@ -22,7 +22,7 @@ class LandingPageController extends Controller
     // Activate the selected landing page
     $landingPage->update(['is_active' => true]);
 
-    return redirect()->route('landing-pages.index')
+    return redirect()->route('admin.landing-pages.index')
                      ->with('success', 'Landing page activated successfully.');
 }
     public function show($id)
@@ -53,7 +53,7 @@ class LandingPageController extends Controller
 
         LandingPage::create($request->all());
 
-        return redirect()->route('landing-pages.index')
+        return redirect()->route('admin.landing-pages.index')
                          ->with('success', 'Landing page created successfully.');
     }
 
@@ -66,7 +66,7 @@ class LandingPageController extends Controller
     {
         $landingPage->update($request->validated());
 
-        return redirect()->route('landing-pages.index')
+        return redirect()->route('admin.landing-pages.index')
                          ->with('success', 'Landing page updated successfully.');
     }
 
@@ -74,7 +74,7 @@ class LandingPageController extends Controller
     {
         $landingPage->delete();
 
-        return redirect()->route('landing-pages.index')
+        return redirect()->route('admin.landing-pages.index')
                          ->with('success', 'Landing page deleted successfully.');
     }
 }

@@ -32,8 +32,8 @@ Route::get('/landing-page/{id}', [LandingPageController::class, 'show'])->name('
 Route::post('landing-pages/{landingPage}/activate', [LandingPageController::class, 'activate'])->name('landing-pages.activate');
 Route::get('/destinations', [DestinationController::class, 'index'])->name('destinations.index');
 Route::get('destinations/{destination}', [DestinationController::class, 'show'])->name('destinations.show');
-Route::get('/accommodations', [AccommodationController::class, 'index'])->name('public-accommodations.index');
-Route::get('accommodations/{accommodation}', [AccommodationController::class, 'show'])->name('public-accommodations.show');
+Route::get('/accommodations', [AccommodationController::class, 'index'])->name('public.accommodations.index');
+Route::get('accommodations/{accommodation}', [AccommodationController::class, 'show'])->name('public.accommodations.show');
 Route::get('/tours', [TourController::class, 'index'])->name('tours.index');
 Route::get('tours/{tour}', [TourController::class, 'show'])->name('tours.show');
 Route::get('/cuisines', [CuisineController::class, 'index'])->name('cuisines.index');
@@ -77,31 +77,18 @@ Route::post('forgotPassword', [ForgotPasswordController::class, 'sendResetLinkEm
 //<----------- Admin Route -------------->
 Route::middleware(['auth', 'role:admin', 'PreventBackHistory'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'showAdminDashboardPage'])->name('admin.dashboard');
-    Route::resource('admin/users', CrudUserController::class);
-    Route::resource('admin/roles', RoleController::class);
-    Route::resource('admin/permissions', PermissionController::class);
-    Route::get('admin/roles/{role}/permissions', [RolePermissionController::class, 'edit'])->name('roles.permissions.edit');
-    Route::post('admin/roles/{role}/permissions', [RolePermissionController::class, 'update'])->name('roles.permissions.update');
+    Route::resource('admin/users', CrudUserController::class)->names('admin.users');
+    Route::resource('admin/roles', RoleController::class)->names('admin.roles');
+    Route::resource('admin/permissions', PermissionController::class)->names('admin.permissions');
+    Route::get('admin/roles/{role}/permissions', [RolePermissionController::class, 'edit'])->name('admin.roles.permissions.edit');
+    Route::post('admin/roles/{role}/permissions', [RolePermissionController::class, 'update'])->name('admin.roles.permissions.update');
     Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
     Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::put('/admin/profile', [AdminController::class, 'updateProfile'])->name('admin.updateProfile');
-    Route::resource('admin/landing-pages', LandingPageController::class);
-    //Route untuk Admin Destinations
-    Route::get('/admin/destinations', [DestinationController::class, 'manage'])->name('admin.destinations.manage');
-    Route::get('/admin/destinations/create', [DestinationController::class, 'create'])->name('admin.destinations.create');
-    Route::post('/admin/destinations', [DestinationController::class, 'store'])->name('admin.destinations.store');
-    Route::get('/admin/destinations/{destination}/edit', [DestinationController::class, 'edit'])->name('admin.destinations.edit');
-    Route::put('/admin/destinations/{destination}', [DestinationController::class, 'update'])->name('admin.destinations.update');
-    Route::delete('/admin/destinations/{destination}', [DestinationController::class, 'destroy'])->name('admin.destinations.destroy');
-    // Route untuk Admin Accommodations
-    Route::resource('admin/accommodations', AdminAccommodationController::class);
-    // Route untuk Admin Cuisines
-    Route::get('/admin/cuisines/', [AdminCuisineController::class, 'index'])->name('admin.cuisines.index');
-    Route::get('admin/cuisines/create', [AdminCuisineController::class, 'create'])->name('admin.cuisines.create');
-    Route::post('admin/cuisines/store', [AdminCuisineController::class, 'store'])->name('admin.cuisines.store');
-    Route::get('/admin/cuisines/{id}/edit', [AdminCuisineController::class, 'edit'])->name('admin.cuisines.edit');
-    Route::put('/admin/cuisines/{id}', [AdminCuisineController::class, 'update'])->name('admin.cuisines.update');
-    Route::delete('/admin/cuisines/{id}', [AdminCuisineController::class, 'delete'])->name('admin.cuisines.destroy');
+    Route::resource('admin/landing-pages', LandingPageController::class)->names('admin.landing-pages');
+    Route::resource('admin/destinations', DestinationController::class)->names('admin.destinations');
+    Route::resource('admin/accommodations', AdminAccommodationController::class)->names('admin.accommodations');
+    Route::resource('admin/cuisines', AdminCuisineController::class)->names('admin.cuisines');
 });
 
 //<----------- Homestay Route -------------->
@@ -114,8 +101,8 @@ Route::middleware(['auth', 'role:homestay', 'PreventBackHistory'])->group(functi
 });
 //<----------- User Route -------------->
 Route::middleware(['auth', 'role:user', 'PreventBackHistory'])->group(function () {
-    Route::get('/{name}/dashboard', [UserController::class, 'showUserDashboardPage'])->name('user.dashboard');
-    Route::get('/{name}/profile', [UserController::class, 'profile'])->name('user.profile');
-    Route::put('/{name}/profile', [UserController::class, 'updateProfile'])->name('user.updateProfile');
-    Route::get('/{name}/bookings', [UserController::class, 'bookings'])->name('user.bookings');
+    Route::get('/user/{name}/dashboard', [UserController::class, 'showUserDashboardPage'])->name('user.dashboard');
+    Route::get('/user/{name}/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::put('/user/{name}/profile', [UserController::class, 'updateProfile'])->name('user.updateProfile');
+    Route::get('/user/{name}/bookings', [UserController::class, 'bookings'])->name('user.bookings');
 });

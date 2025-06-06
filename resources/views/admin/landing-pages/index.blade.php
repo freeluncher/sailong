@@ -3,7 +3,7 @@
 @section('content')
     <div class="h-screen">
         <h1 class="text-2xl font-bold mb-6">Manage Landing Pages</h1>
-        <a href="{{ route('landing-pages.create') }}" class="bg-blue-500 text-white px-4 py-2">Create New Page</a>
+        <a href="{{ route('admin.landing-pages.create') }}" class="bg-blue-500 text-white px-4 py-2">Create New Page</a>
 
         @if ($pages->count())
             <table class="mt-6 w-full">
@@ -20,8 +20,8 @@
                         <tr>
                             <td class="border px-4 py-2">{{ $page->title }}</td>
                             <td class="border px-4 py-2">
-                                <a href="{{ route('landing-pages.edit', $page) }}" class="text-blue-500">Edit</a>
-                                <form action="{{ route('landing-pages.destroy', $page) }}" method="POST"
+                                <a href="{{ route('admin.landing-pages.edit', $page) }}" class="text-blue-500">Edit</a>
+                                <form action="{{ route('admin.landing-pages.destroy', $page) }}" method="POST"
                                     class="inline-block"
                                     onsubmit="return confirm('Are you sure you want to delete this page?');">
                                     @csrf
@@ -30,7 +30,7 @@
                                 </form>
                             </td>
                             <td class="border px-4 py-2">
-                                <a href="{{ route('landing-pages.show', $page) }}" class="text-green-500">View</a>
+                                <a href="{{ route('landing-page.show', $page) }}" class="text-green-500">View</a>
                             </td>
                             <td class="border px-4 py-2">
                                 @if (!$page->is_active)

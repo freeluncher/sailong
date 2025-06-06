@@ -66,7 +66,7 @@ class DestinationController extends Controller
 
         $destination->save();
 
-        return redirect()->route('admin.destinations.manage');
+        return redirect()->route('admin.destinations.index');
     }
 
 
@@ -109,12 +109,12 @@ class DestinationController extends Controller
 
         $destination->save();
 
-        return redirect()->route('admin.destinations.manage');
+        return redirect()->route('admin.destinations.index');
     }
 
     public function destroy(Destination $destination)
     {
         $destination->delete();
-        return redirect()->route('admin.destinations.manage');
+        return redirect()->route('admin.destinations.index');
     }
 }
