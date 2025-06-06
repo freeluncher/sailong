@@ -3,22 +3,22 @@
 @section('content')
     <!-- Hero Section -->
     <div class="relative h-screen w-full overflow-hidden">
-        <div class="absolute top-16 z-20 w-full flex flex-col items-center mb-6 px-4 md:px-8">
+        <div class="absolute top-16 z-20 w-full flex flex-col items-center mb-6 px-4 md:px-8 md:mt-4">
             <div
-                class="flex flex-wrap justify-center items-center space-x-0 space-y-2 sm:space-x-8 sm:space-y-4 md:space-y-0">
+                class="flex flex-wrap justify-center items-center space-x-0 space-y-0 sm:space-x-8 sm:space-y-2 md:space-y-0 sm:mt-4 mt-2">
 
                 <div class="flex flex-col md:flex-row items-center space-x-2">
-                    <img src="{{ Storage::url('img/logo-udinus.png') }}" alt="Instansi 3" class="h-10 sm:h-12">
+                    <img src="{{ Storage::url('img/logo-udinus.png') }}" alt="Instansi 3" class="h-10 sm:h-16">
                 </div>
 
-                <div class="flex flex-col md:flex-row items-center space-x-2 lg:">
-                    <img src="{{ Storage::url('img/logo-unggul.png') }}" alt="Instansi 1" class="h-10 sm:h-20 pt-2">
+                <div class="flex flex-col md:flex-row items-center space-x-2">
+                    <img src="{{ Storage::url('img/logo-unggul.png') }}" alt="Instansi 1" class="h-10 sm:h-16">
                     <div class="flex flex-col items-center md:items-start">
                     </div>
                 </div>
 
                 <div class="flex flex-col md:flex-row items-center space-x-2">
-                    <img src="{{ Storage::url('img/logo-bem.png') }}" alt="Instansi 2" class="h-14 sm:h-16">
+                    <img src="{{ Storage::url('img/logo-bem.png') }}" alt="Instansi 2" class="h-10 sm:h-16">
                     <div class="flex flex-col items-center md:items-start">
                     </div>
                 </div>
@@ -40,29 +40,13 @@
                 class="flex flex-wrap justify-center items-center space-x-0 space-y-2 sm:space-x-8 sm:space-y-4 md:space-y-0">
 
                 <div class="flex flex-col md:flex-row items-center space-x-2">
-                    <img src="{{ Storage::url('img/logo-poldajateng.png') }}" alt="Instansi 3" class="h-10 sm:h-12">
-                    <div class="flex flex-col items-center md:items-start">
-                        <p class="text-white font-bold text-xl sm:text-2xl">POKDARWIS</p>
-                        <p class="text-white text-xs sm:text-sm">gunung sari</p>
-                    </div>
+                    <img src="{{ Storage::url('img/pemkab-kendal.png') }}" alt="Instansi 3" class="h-20 sm:h-20">
                 </div>
 
                 <div class="flex flex-col md:flex-row items-center space-x-2 lg:">
-                    <img src="{{ Storage::url('img/logo-disbudpar-trans.png') }}" alt="Instansi 1"
-                        class="h-10 sm:h-12 pt-2">
-                    <div class="flex flex-col items-center md:items-start">
-                        <p class="text-white font-bold text-xl sm:text-2xl">DISBUDPAR</p>
-                        <p class="text-white text-xs sm:text-sm">pariwisata.semarangkota.go.id</p>
-                    </div>
+                    <img src="{{ Storage::url('img/logo-disporapar.png') }}" alt="Instansi 1" class="h-20 sm:h-20 pt-2">
                 </div>
 
-                <div class="flex flex-col md:flex-row items-center space-x-2">
-                    <img src="{{ Storage::url('img/logo-perhutani.png') }}" alt="Instansi 2" class="h-14 sm:h-16">
-                    <div class="flex flex-col items-center md:items-start">
-                        <p class="text-white font-bold text-xl sm:text-2xl">Perhutani</p>
-                        <p class="text-white text-xs sm:text-sm">semarang</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

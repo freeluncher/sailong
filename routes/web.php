@@ -97,8 +97,11 @@ Route::middleware(['auth', 'role:admin', 'PreventBackHistory'])->group(function 
     Route::resource('admin/accommodations', AdminAccommodationController::class);
     // Route untuk Admin Cuisines
     Route::get('/admin/cuisines/', [AdminCuisineController::class, 'index'])->name('admin.cuisines.index');
+    Route::get('admin/cuisines/create', [AdminCuisineController::class, 'create'])->name('admin.cuisines.create');
+    Route::post('admin/cuisines/store', [AdminCuisineController::class, 'store'])->name('admin.cuisines.store');
     Route::get('/admin/cuisines/{id}/edit', [AdminCuisineController::class, 'edit'])->name('admin.cuisines.edit');
     Route::put('/admin/cuisines/{id}', [AdminCuisineController::class, 'update'])->name('admin.cuisines.update');
+    Route::delete('/admin/cuisines/{id}', [AdminCuisineController::class, 'delete'])->name('admin.cuisines.destroy');
 });
 
 //<----------- Homestay Route -------------->

@@ -25,15 +25,18 @@
                 class="absolute mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50" x-cloak>
                 <a href="{{ route('public-accommodations.index') }}"
                     class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Accommodations</a>
-                <a href="{{ route('tours.index') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Tours</a>
+                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Tours
+                    (coming soon)</a>
                 <a href="{{ route('cuisines.index') }}"
                     class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cuisines</a>
                 <a href="{{ route('destinations.index') }}"
                     class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Destinations</a>
             </div>
         </div>
-        <a href="#" class="text-gray-600 hover:text-gray-800">Jadi Mitra</a>
-        <a href="#" class="text-gray-600 hover:text-gray-800">Hubungi Kami</a>
+        <a href="https://wa.me/+6282136263772?text=Halo%20Min!%20Saya%20tertarik%20untuk%20jadi%20mitra!"
+            class="text-gray-600 hover:text-gray-800" target="_blank">Jadi Mitra</a>
+        <a href="https://wa.me/+6282136263772?text=Halo%20Min!%20Saya%20mau%20tanya." target="_blank"
+            class="text-gray-600 hover:text-gray-800">Hubungi Kami</a>
         <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
             alt="{{ Auth::user()->name }}" />
         <div class="relative" x-data="{ open: false }">

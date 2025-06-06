@@ -15,6 +15,49 @@ class AdminCuisineController extends Controller
         return view('admin.cuisines.index', compact('cuisines'));
     }
 
+    public function create()
+    {
+        return view('admin.cuisines.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'required|image',
+            'gallery.*' => 'image',
+            'opening_hours' => 'required',
+            'closing_hours' => 'required',
+            'ticket_price' => 'required|numeric',
+        ]);
+
+        $image = $request->file('image')->store('img', 'public');
+
+        $galleryImages = [];
+        if ($request->hasFile('gallery')) {
+            foreach ($request->file('gallery') as $file) {
+                $path = $file->store('img', 'public');
+                $galleryImages[] = ['image' => $path];
+            }
+        }
+
+        $cuisine = Cuisine::create([
+            'name' => $request->name,
+            'location' => $request->location,
+            'description' => $request->description,
+            'image' => $image,
+            'gallery' => $galleryImages,
+            'opening_hours' => $request->opening_hours,
+            'closing_hours' => $request->closing_hours,
+            'ticket_price' => $request->ticket_price,
+        ]);
+
+        return redirect()->route('admin.cuisines.index')->with('success', 'Cuisine created successfully.');
+    }
+
+
     public function edit($id)
     {
         $cuisine = Cuisine::findOrFail($id);

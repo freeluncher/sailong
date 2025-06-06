@@ -105,10 +105,12 @@
             <a href="{{ route('tours.index') }}" class="text-white hover:text-gray-300 pl-4">Tours</a>
         </div>
         <div class="flex">
-            <a href="#" class="text-white hover:text-gray-300">Jadi Mitra</a>
+            <a href="https://wa.me/+6282136263772?text=Halo%20Min!%20Saya%20tertarik%20untuk%20jadi%20mitra!"
+                class="text-white hover:text-gray-300" target="_blank">Jadi Mitra</a>
         </div>
         <div class="flex">
-            <a href="#" class="text-white hover:text-gray-300">Hubungi Kami</a>
+            <a href="https://wa.me/+6282136263772?text=Halo%20Min!%20Saya%20mau%20tanya." target="_blank"
+                class="text-white hover:text-gray-300">Hubungi Kami</a>
         </div>
         <div class="relative" x-data="{ profileOpen: false }">
             <div class="flex mt-10 justify-center">
