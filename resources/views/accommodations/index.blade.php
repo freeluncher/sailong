@@ -17,7 +17,7 @@
                             <p class="text-gray-600 line-clamp-2">{{ $accommodation->description }}</p>
                             <p class="text-gray-900 font-bold mt-4">Ticket Price: Rp{{ $accommodation->price_per_night }}
                             </p>
-                            <a href="{{ route('public-accommodations.show', $accommodation) }}"
+                            <a href="{{ route('public.accommodations.show', $accommodation) }}"
                                 class="text-blue-500 mt-4 inline-block">View Details</a>
                         </div>
                     </div>
