@@ -47,7 +47,7 @@
                             ],
                             [
                                 'name' => 'Accommodations',
-                                'url' => route('public.accommodations.index'),
+                                'url' => route('admin.accommodations.index'),
                                 'icon' => 'fa-solid fa-hotel',
                             ],
                             [

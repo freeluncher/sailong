@@ -2,8 +2,8 @@
 
 <div x-data="{ open: true }" class="flex">
     <div :class="open ? 'w-64' : 'w-16'"
-        class="bg-gray-800 text-white space-y-6 py-7 px-2 transition-all duration-300 h-full flex flex-col items-center relative">
-        <button @click="open = !open" class="text-white focus:outline-none absolute top-4 right-4">
+        class="bg-blue-900 text-white space-y-6 py-7 px-2 transition-all duration-300 h-full flex flex-col items-center relative shadow-lg">
+        <button @click="open = !open" class="text-white focus:outline-none absolute top-4 right-4 hover:bg-blue-800 rounded-full p-1 transition">
             <i x-show="open" class="fas fa-angle-double-left"></i>
             <i x-show="!open" class="fas fa-angle-double-right"></i>
         </button>
@@ -17,10 +17,19 @@
         </div>
         <nav :class="open ? 'px-4 w-full' : 'w-full flex flex-col items-center'">
             @foreach ($menu as $item)
+                @php
+                    // Patch for admin destinations and accommodations
+                    if ($item['name'] === 'Destinations') {
+                        $item['url'] = route('admin.destinations.index');
+                    }
+                    if ($item['name'] === 'Accommodations') {
+                        $item['url'] = route('admin.accommodations.index');
+                    }
+                @endphp
                 @if (isset($item['submenu']))
                     <div x-data="{ openSubmenu: false }" class="w-full">
                         <a href="#" @click.prevent="openSubmenu = !openSubmenu"
-                            class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 w-full">
+                            class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-blue-800 w-full">
                             <div class="flex items-center w-full">
                                 <i
                                     :class="open ? $item['icon'] . ' w-8' : $item['icon'] . ' text-2xl w-full text-center'"></i>
@@ -35,7 +44,7 @@
                             class="w-full">
                             @foreach ($item['submenu'] as $submenu)
                                 <a href="{{ $submenu['url'] }}"
-                                    class="flex items-center py-2 px-4 rounded transition duration-200 hover:bg-gray-700 w-full">
+                                    class="flex items-center py-2 px-4 rounded transition duration-200 hover:bg-blue-800 w-full">
                                     <i :class="open ? $submenu['icon'] . ' w-8' : $submenu['icon'] . ' text-2xl w-full text-center'"></i>
                                     <span :class="open ? 'ml-2' : 'hidden'"
                                         class="transition-all duration-300">{{ $submenu['name'] }}</span>
@@ -45,7 +54,7 @@
                     </div>
                 @else
                     <a href="{{ $item['url'] }}"
-                        class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 w-full">
+                        class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-blue-800 w-full">
                         <i :class="open ? $item['icon'] . ' w-8' : $item['icon'] . ' text-2xl w-full text-center'"></i>
                         <span :class="open ? 'ml-2' : 'hidden'"
                             class="transition-all duration-300">{{ $item['name'] }}</span>

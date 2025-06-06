@@ -12,7 +12,7 @@ class DestinationController extends Controller
     public function index()
     {
         $destinations = Destination::all();
-        return view('destinations.index', compact('destinations'));
+        return view('admin.destinations.index', compact('destinations'));
     }
 
     public function show($id)
